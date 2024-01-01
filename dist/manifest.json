@@ -11,12 +11,12 @@
   ],
     "browser_action": {
         "default_icon": "icons/leftpad-32.png",
-        "default_title": "Left Pad",
-        "default_popup": "popup/left-pad.html",
+        "default_title": "YTP",
+        "default_popup": "popup.html",
         "browser_style": true
     },
     "background": {
-        "scripts": ["background_scripts/index.build.js"]
+        "scripts": ["background_scripts.js"]
     },
   "host_permissions": [
     "tabs",

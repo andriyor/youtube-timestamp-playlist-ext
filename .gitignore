@@ -1,4 +1,4 @@
 .idea
 node_modules
 
-addon/*/index.build.js
+dist

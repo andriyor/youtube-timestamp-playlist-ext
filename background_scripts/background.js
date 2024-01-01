@@ -21,16 +21,16 @@ browser.runtime.onMessage.addListener((message) => {
   console.log("message");
   console.log(message);
   if (message.text === "playYoutube") {
-    browser.tabs.query({ active: true, currentWindow: true }).then(async (tabs) => {
+    browser.tabs.query({active: true, currentWindow: true}).then(async (tabs) => {
       for (const video of playlist) {
 
-        await browser.tabs.update(tabs[0].id, { url: video.url });
+        await browser.tabs.update(tabs[0].id, {url: video.url});
 
         console.log("updated");
 
         await timeout(2000);
 
-        await browser.tabs.executeScript({ file: "/content_scripts/index.build.js" });
+        await browser.tabs.executeScript({file: "/content_scripts.js"})
 
         console.log("executed");
 
