@@ -16,6 +16,9 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "react-dom": "^18.2.0",
+    "vite": "^5.0.10",
     "webextension-polyfill": "^0.10.0"
   }
 }
