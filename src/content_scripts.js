@@ -1,6 +1,8 @@
-import browser from "webextension-polyfill";
-import React, {useState} from 'react';
-import {createRoot} from "react-dom/client";
+import browser from 'webextension-polyfill';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+
+import { App } from './content-script/App';
 
 (function () {
   /**
@@ -14,44 +16,27 @@ import {createRoot} from "react-dom/client";
   window.hasRun = true;
 
   browser.runtime.onMessage.addListener((message) => {
-    if (message.command === "track") {
-      const video = document.querySelector('video')
+    if (message.command === 'track') {
+      const video = document.querySelector('video');
       return new Promise((resolve) => {
         video.addEventListener('timeupdate', (e) => {
           console.log(e.target.currentTime);
           console.log(message.endTime);
           console.log('');
           if (e.target.currentTime >= message.endTime) {
-            resolve()
+            resolve();
           }
         });
-      })
+      });
     }
   });
 
-
-  const Component = () => {
-    const [count, setCount] = useState(0);
-
-    const handleClick = () => {
-      setCount(count + 1);
-    }
-
-    return <div>
-      <div>
-        {count}
-      </div>
-      <button onClick={handleClick}>button</button>
-    </div>
-  }
-
-
   setTimeout(() => {
     const topRow = document.querySelector('#top-row');
-    const span = document.createElement("span")
-    span.setAttribute("id", "Div1")
-    topRow.after(span)
+    const span = document.createElement('span');
+    span.setAttribute('id', 'Div1');
+    topRow.after(span);
     const root = createRoot(span);
-    root.render(<Component/>);
-  }, 1000)
+    root.render(<App />);
+  }, 1000);
 })();
