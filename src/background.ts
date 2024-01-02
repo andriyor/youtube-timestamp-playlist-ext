@@ -1,17 +1,21 @@
 import browser from 'webextension-polyfill';
 
-const playlist = [
+import type { Playlist } from './types/playlist';
+
+const playlist: Playlist[] = [
   {
-    url: 'https://youtu.be/R3udqk9ahRM?si=8bvTCoKPJG1UNL4c&t=339',
+    videoId: 'R3udqk9ahRM',
+    startSecond: 339,
     end: 400,
   },
   {
-    url: 'https://www.youtube.com/watch?v=RPaZvCNd6P4&t=1657s',
+    videoId: 'RPaZvCNd6P4',
+    startSecond: 1657,
     end: 1667,
   },
 ];
 
-function timeout(ms) {
+function timeout(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
@@ -21,7 +25,9 @@ browser.runtime.onMessage.addListener((message) => {
       .query({ active: true, currentWindow: true })
       .then(async (tabs) => {
         for (const video of playlist) {
-          await browser.tabs.update(tabs[0].id, { url: video.url });
+          await browser.tabs.update(tabs[0].id, {
+            url: `https://www.youtube.com/watch?v=${video.videoId}&t=${video.startSecond}`,
+          });
 
           await timeout(2000);
 

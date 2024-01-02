@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    background_scripts: './src/background.js',
+    background_scripts: './src/background.ts',
     content_scripts: './src/content_scripts.tsx',
     popup: './src/popup.tsx',
   },
