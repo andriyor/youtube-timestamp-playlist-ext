@@ -1,17 +1,17 @@
 import React from 'react';
-import { format } from 'date-fns/format';
-import {
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from '@mui/material';
+import { IconButton, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { SectionForm } from './sectionForm';
+import { Playlist, Section } from '../types/playlist';
+import { formatSeconds } from '../helpers';
 
-export const Section = ({ playlist, onAddSection }) => {
+type SectionComponentProps = {
+  playlist: Playlist;
+  onAddSection: (section: Section) => void;
+};
+
+export const SectionComponent = ({ playlist, onAddSection }: SectionComponentProps) => {
   return (
     <List>
       {playlist?.sections?.map((section) => {
@@ -27,10 +27,7 @@ export const Section = ({ playlist, onAddSection }) => {
           >
             <ListItemButton>
               <ListItemText
-                primary={`${section.title} ${format(
-                  section.start * 1000,
-                  'mm:ss',
-                )} - ${format(section.start * 1000, 'mm:ss')}`}
+                primary={`${section.title} ${formatSeconds(section.startSecond)} - ${formatSeconds(section.endSecond)}`}
               />
             </ListItemButton>
           </ListItem>

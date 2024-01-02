@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
-import { format } from 'date-fns/format';
 import { Typography } from '@mui/material';
 
-export const SectionForm = ({ onAddSection }) => {
-  const [form, setForm] = useState({
+import { Section } from '../types/playlist';
+import { formatSeconds } from '../helpers';
+
+type SectionFormProps = {
+  onAddSection: (section: Section) => void;
+};
+
+export const SectionForm = ({ onAddSection }: SectionFormProps) => {
+  const params = new URL(document.location.href).searchParams;
+  const videoId = params.get('v');
+
+  const [form, setForm] = useState<Section>({
+    videoId: videoId,
     title: '',
-    start: 0,
-    end: 0,
+    startSecond: 0,
+    endSecond: 0,
   });
 
   const setCurrentPositionAsStart = () => {
     const video = document.querySelector('video');
     setForm({
       ...form,
-      start: Math.round(video.currentTime),
+      startSecond: Math.round(video.currentTime),
     });
   };
 
@@ -21,11 +31,11 @@ export const SectionForm = ({ onAddSection }) => {
     const video = document.querySelector('video');
     setForm({
       ...form,
-      end: Math.round(video.currentTime),
+      endSecond: Math.round(video.currentTime),
     });
   };
 
-  const handleTitleChange = (e) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       title: e.target.value,
@@ -42,20 +52,12 @@ export const SectionForm = ({ onAddSection }) => {
       <input type="text" onChange={handleTitleChange} />
       <div style={{ display: 'flex' }}>
         <Typography gutterBottom>Start</Typography>
-        <input
-          type="text"
-          onChange={() => {}}
-          value={format(Math.round(form.start) * 1000, 'mm:ss')}
-        />
+        <input type="text" onChange={() => {}} value={formatSeconds(form.startSecond)} />
         <button onClick={setCurrentPositionAsStart}>current position</button>
       </div>
       <div style={{ display: 'flex' }}>
         <Typography gutterBottom>End</Typography>
-        <input
-          type="text"
-          onChange={() => {}}
-          value={format(Math.round(form.end) * 1000, 'mm:ss')}
-        />
+        <input type="text" onChange={() => {}} value={formatSeconds(form.endSecond)} />
         <button onClick={setCurrentPositionAsEnd}>current position</button>
       </div>
       <button onClick={handleAddSection}>Add section</button>

@@ -1,5 +1,11 @@
-export type Playlist = {
+export type Section = {
+  title: string;
   videoId: string;
   startSecond: number;
-  end: number;
+  endSecond: number;
+};
+
+export type Playlist = {
+  title: string;
+  sections: Section[];
 };

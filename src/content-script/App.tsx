@@ -1,12 +1,14 @@
 import browser from 'webextension-polyfill';
-import { Playlist } from './playlist';
-import { Section } from './section';
 import React, { useEffect, useState } from 'react';
+
+import { PlaylistComponent } from './playlistComponent';
+import { SectionComponent } from './sectionComponent';
+import { Playlist, Section } from '../types/playlist';
 
 export const App = () => {
   const [view, setView] = useState('playlist');
 
-  const [playlists, setPlaylists] = useState([]);
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState(0);
 
   useEffect(() => {
@@ -17,24 +19,22 @@ export const App = () => {
     });
   }, []);
 
-  const handlePlaylistClick = (playlistIndex) => {
+  const handlePlaylistClick = (playlistIndex: number) => {
     setSelectedPlaylist(playlistIndex);
     setView('chapters');
   };
 
-  const handleAddPlaylist = (playlistName) => {
-    const newPlaylists = [...playlists, { name: playlistName, sections: [] }];
+  const handleAddPlaylist = (playlistName: string) => {
+    const newPlaylist: Playlist = { title: playlistName, sections: [] };
+    const newPlaylists = [...playlists, newPlaylist];
     setPlaylists(newPlaylists);
     browser.storage.local.set({ playlists: newPlaylists });
   };
 
-  const handleAddSection = (section) => {
+  const handleAddSection = (section: Section) => {
     const newPlaylist = [...playlists];
     if (newPlaylist[selectedPlaylist].sections) {
-      newPlaylist[selectedPlaylist].sections = [
-        ...newPlaylist[selectedPlaylist].sections,
-        section,
-      ];
+      newPlaylist[selectedPlaylist].sections = [...newPlaylist[selectedPlaylist].sections, section];
     } else {
       newPlaylist[selectedPlaylist].sections = [section];
     }
@@ -45,7 +45,7 @@ export const App = () => {
 
   if (view === 'playlist') {
     return (
-      <Playlist
+      <PlaylistComponent
         playlists={playlists}
         onAddPlaylist={handleAddPlaylist}
         onPlaylistClick={handlePlaylistClick}
@@ -53,11 +53,6 @@ export const App = () => {
     );
   }
   if (view === 'chapters') {
-    return (
-      <Section
-        playlist={playlists[selectedPlaylist]}
-        onAddSection={handleAddSection}
-      />
-    );
+    return <SectionComponent playlist={playlists[selectedPlaylist]} onAddSection={handleAddSection} />;
   }
 };

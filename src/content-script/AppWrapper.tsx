@@ -1,5 +1,6 @@
 import React from 'react';
-import { createTheme, ThemeProvider, Typography } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material';
+
 import { App } from './App';
 
 export const AppWrapper = () => {

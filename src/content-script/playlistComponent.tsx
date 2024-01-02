@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
-
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 
-export const Playlist = ({ playlists, onAddPlaylist, onPlaylistClick }) => {
+import { Playlist } from '../types/playlist';
+
+type PlaylistComponentProps = {
+  playlists: Playlist[];
+  onAddPlaylist: (playlistName: string) => void;
+  onPlaylistClick: (playlistIndex: number) => void;
+};
+
+export const PlaylistComponent = ({ playlists, onAddPlaylist, onPlaylistClick }: PlaylistComponentProps) => {
   const [playlistName, setPlaylistName] = useState('');
 
-  const handlePlaylistClick = (playlistIndex) => {
+  const handlePlaylistClick = (playlistIndex: number) => {
     onPlaylistClick(playlistIndex);
   };
 
@@ -19,9 +26,9 @@ export const Playlist = ({ playlists, onAddPlaylist, onPlaylistClick }) => {
       <List>
         {playlists.map((playlist, index) => {
           return (
-            <ListItem disablePadding key={playlist.name}>
+            <ListItem disablePadding key={playlist.title}>
               <ListItemButton onClick={() => handlePlaylistClick(index)}>
-                <ListItemText primary={playlist.name} />
+                <ListItemText primary={playlist.title} />
               </ListItemButton>
             </ListItem>
           );

@@ -2,8 +2,10 @@ import browser from 'webextension-polyfill';
 import React, { useEffect, useState } from 'react';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 
+import { Playlist } from '../types/playlist';
+
 export const App = () => {
-  const [playlists, setPlaylists] = useState([]);
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
   useEffect(() => {
     browser.storage.local.get().then((res) => {
@@ -15,7 +17,7 @@ export const App = () => {
     });
   }, []);
 
-  const handlePlaylistClick = (playlist) => {
+  const handlePlaylistClick = (playlist: Playlist) => {
     browser.runtime.sendMessage({
       text: 'playYoutube',
       playlist,
@@ -31,9 +33,9 @@ export const App = () => {
       <List>
         {playlists.map((playlist) => {
           return (
-            <ListItem disablePadding key={playlist.name}>
+            <ListItem disablePadding key={playlist.title}>
               <ListItemButton onClick={() => handlePlaylistClick(playlist)}>
-                <ListItemText primary={playlist.name} />
+                <ListItemText primary={playlist.title} />
               </ListItemButton>
             </ListItem>
           );

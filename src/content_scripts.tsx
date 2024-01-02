@@ -22,9 +22,9 @@ import { AppWrapper } from './content-script/AppWrapper';
         video.addEventListener('timeupdate', (e: Event) => {
           const videoElement = e.target as HTMLVideoElement;
           console.log(videoElement.currentTime);
-          console.log(message.endTime);
+          console.log(message.endSecond);
           console.log('');
-          if (videoElement.currentTime >= message.endTime) {
+          if (videoElement.currentTime >= message.endSecond) {
             resolve();
           }
         });
