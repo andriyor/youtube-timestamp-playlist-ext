@@ -9,31 +9,37 @@ import { formatSeconds } from '../helpers';
 type SectionComponentProps = {
   playlist: Playlist;
   onAddSection: (section: Section) => void;
+  onBackToPlaylist: () => void;
 };
 
-export const SectionComponent = ({ playlist, onAddSection }: SectionComponentProps) => {
+export const SectionComponent = ({ playlist, onAddSection, onBackToPlaylist }: SectionComponentProps) => {
   return (
-    <List>
-      {playlist?.sections?.map((section) => {
-        return (
-          <ListItem
-            disablePadding
-            key={section.title}
-            secondaryAction={
-              <IconButton edge="end" aria-label="delete">
-                <DeleteIcon />
-              </IconButton>
-            }
-          >
-            <ListItemButton>
-              <ListItemText
-                primary={`${section.title} ${formatSeconds(section.startSecond)} - ${formatSeconds(section.endSecond)}`}
-              />
-            </ListItemButton>
-          </ListItem>
-        );
-      })}
+    <div>
+      <button onClick={onBackToPlaylist}>Back to playlist</button>
+      <List>
+        {playlist?.sections?.map((section) => {
+          return (
+            <ListItem
+              disablePadding
+              key={section.title}
+              secondaryAction={
+                <IconButton edge="end" aria-label="delete">
+                  <DeleteIcon />
+                </IconButton>
+              }
+            >
+              <ListItemButton>
+                <ListItemText
+                  primary={`${section.title} ${formatSeconds(section.startSecond)} - ${formatSeconds(
+                    section.endSecond,
+                  )}`}
+                />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
       <SectionForm onAddSection={onAddSection} />
-    </List>
+    </div>
   );
 };

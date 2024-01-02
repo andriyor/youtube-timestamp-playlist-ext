@@ -5,8 +5,10 @@ import { PlaylistComponent } from './playlistComponent';
 import { SectionComponent } from './sectionComponent';
 import { Playlist, Section } from '../types/playlist';
 
+type View = 'playlist' | 'sections';
+
 export const App = () => {
-  const [view, setView] = useState('playlist');
+  const [view, setView] = useState<View>('playlist');
 
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState(0);
@@ -21,7 +23,7 @@ export const App = () => {
 
   const handlePlaylistClick = (playlistIndex: number) => {
     setSelectedPlaylist(playlistIndex);
-    setView('chapters');
+    setView('sections');
   };
 
   const handleAddPlaylist = (playlistName: string) => {
@@ -43,6 +45,10 @@ export const App = () => {
     browser.storage.local.set({ playlists: newPlaylist });
   };
 
+  const handleBackToPlaylist = () => {
+    setView('playlist');
+  };
+
   if (view === 'playlist') {
     return (
       <PlaylistComponent
@@ -52,7 +58,13 @@ export const App = () => {
       />
     );
   }
-  if (view === 'chapters') {
-    return <SectionComponent playlist={playlists[selectedPlaylist]} onAddSection={handleAddSection} />;
+  if (view === 'sections') {
+    return (
+      <SectionComponent
+        playlist={playlists[selectedPlaylist]}
+        onAddSection={handleAddSection}
+        onBackToPlaylist={handleBackToPlaylist}
+      />
+    );
   }
 };
