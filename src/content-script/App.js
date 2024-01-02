@@ -9,7 +9,7 @@ export const App = () => {
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState(0);
 
-  useEffect(async () => {
+  useEffect(() => {
     browser.storage.local.get().then((res) => {
       setPlaylists(res.playlists);
     });

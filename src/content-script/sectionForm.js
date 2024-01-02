@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns/format';
+import { Typography } from '@mui/material';
 
 export const SectionForm = ({ onAddSection }) => {
   const [form, setForm] = useState({
@@ -37,20 +38,22 @@ export const SectionForm = ({ onAddSection }) => {
 
   return (
     <div>
-      <div>Section title</div>
+      <Typography gutterBottom>Section title</Typography>
       <input type="text" onChange={handleTitleChange} />
       <div style={{ display: 'flex' }}>
-        <div>start</div>
+        <Typography gutterBottom>Start</Typography>
         <input
           type="text"
+          onChange={() => {}}
           value={format(Math.round(form.start) * 1000, 'mm:ss')}
         />
         <button onClick={setCurrentPositionAsStart}>current position</button>
       </div>
       <div style={{ display: 'flex' }}>
-        <div>end</div>
+        <Typography gutterBottom>End</Typography>
         <input
           type="text"
+          onChange={() => {}}
           value={format(Math.round(form.end) * 1000, 'mm:ss')}
         />
         <button onClick={setCurrentPositionAsEnd}>current position</button>
