@@ -38,6 +38,7 @@ export const App = () => {
     }
 
     setPlaylists(newPlaylist);
+    browser.storage.local.set({ playlists: newPlaylist });
   };
 
   if (view === 'playlist') {
