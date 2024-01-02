@@ -2,7 +2,7 @@ import browser from 'webextension-polyfill';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { App } from './content-script/App';
+import { AppWrapper } from './content-script/AppWrapper';
 
 (function () {
   /**
@@ -37,6 +37,6 @@ import { App } from './content-script/App';
     span.setAttribute('id', 'Div1');
     topRow.after(span);
     const root = createRoot(span);
-    root.render(<App />);
+    root.render(<AppWrapper />);
   }, 1000);
 })();

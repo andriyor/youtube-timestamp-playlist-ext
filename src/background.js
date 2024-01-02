@@ -16,8 +16,6 @@ function timeout(ms) {
 }
 
 browser.runtime.onMessage.addListener((message) => {
-  console.log('message');
-  console.log(message);
   if (message.text === 'playYoutube') {
     browser.tabs
       .query({ active: true, currentWindow: true })

@@ -1,6 +1,6 @@
-import browser from "webextension-polyfill";
+import browser from 'webextension-polyfill';
 
-document.getElementById("youtube").addEventListener("click", () => {
+document.getElementById('youtube').addEventListener('click', () => {
   browser.runtime.sendMessage({
     text: 'playYoutube',
   });
