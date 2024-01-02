@@ -21,6 +21,12 @@
       "background_scripts.js"
     ]
   },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content_scripts.js"]
+    }
+  ],
   "host_permissions": [
     "tabs",
     "notifications",
