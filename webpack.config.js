@@ -1,12 +1,12 @@
-const webpack = require('webpack')
+const webpack = require('webpack');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    background_scripts: "./src/background.js",
-    content_scripts: "./src/content_scripts.js",
-    popup: "./src/popup.js"
+    background_scripts: './src/background.js',
+    content_scripts: './src/content_scripts.js',
+    popup: './src/popup.tsx',
   },
   mode: 'none',
   module: {
@@ -16,10 +16,15 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
   },
   plugins: [
     // fix "process is not defined" error:
@@ -27,9 +32,7 @@ module.exports = {
       process: 'process/browser',
     }),
     new CopyWebpackPlugin({
-      patterns: [
-        { from: 'public' }
-      ]
-    })
-  ]
+      patterns: [{ from: 'public' }],
+    }),
+  ],
 };

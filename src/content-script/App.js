@@ -11,7 +11,9 @@ export const App = () => {
 
   useEffect(() => {
     browser.storage.local.get().then((res) => {
-      setPlaylists(res.playlists);
+      if (res.playlists) {
+        setPlaylists(res.playlists);
+      }
     });
   }, []);
 
