@@ -18,12 +18,13 @@ import { AppWrapper } from './content-script/AppWrapper';
   browser.runtime.onMessage.addListener((message) => {
     if (message.command === 'track') {
       const video = document.querySelector('video');
-      return new Promise((resolve) => {
-        video.addEventListener('timeupdate', (e) => {
-          console.log(e.target.currentTime);
+      return new Promise<void>((resolve) => {
+        video.addEventListener('timeupdate', (e: Event) => {
+          const videoElement = e.target as HTMLVideoElement;
+          console.log(videoElement.currentTime);
           console.log(message.endTime);
           console.log('');
-          if (e.target.currentTime >= message.endTime) {
+          if (videoElement.currentTime >= message.endTime) {
             resolve();
           }
         });
