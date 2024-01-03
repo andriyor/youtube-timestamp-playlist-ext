@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button, Grid, TextField } from '@mui/material';
 
 import { Section } from '../../types/playlist';
 import { formatSeconds } from '../../helpers';
@@ -46,15 +46,34 @@ export const SectionForm = ({ onAddSection }: SectionFormProps) => {
     onAddSection(form);
   };
 
+  const setCurrentTitle = () => {
+    const title = (document.querySelector('h1.ytd-watch-metadata') as HTMLTitleElement).innerText;
+    setForm({
+      ...form,
+      title,
+    });
+  };
+
   return (
     <div>
       <Box sx={{ mb: 2 }}>
-        <TextField
-          label="Section title"
-          variant="outlined"
-          size="small"
-          onChange={handleTitleChange}
-        />
+        <Grid container spacing={2}>
+          <Grid xs={8} item>
+            <TextField
+              fullWidth
+              label="Section title"
+              variant="outlined"
+              size="small"
+              value={form.title}
+              onChange={handleTitleChange}
+            />
+          </Grid>
+          <Grid xs={4} item>
+            <Button variant="contained" onClick={setCurrentTitle}>
+              Current title
+            </Button>
+          </Grid>
+        </Grid>
       </Box>
 
       <Box sx={{ mb: 2, display: 'flex' }}>
