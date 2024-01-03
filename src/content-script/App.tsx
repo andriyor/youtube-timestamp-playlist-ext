@@ -1,9 +1,9 @@
 import browser from 'webextension-polyfill';
 import React, { useEffect, useState } from 'react';
 
-import { PlaylistComponent } from './playlistComponent';
-import { SectionComponent } from './sectionComponent';
 import { Playlist, Section } from '../types/playlist';
+import { PlaylistComponent } from './playlist/playlistComponent';
+import { SectionComponent } from './section/sectionComponent';
 
 type View = 'playlist' | 'sections';
 

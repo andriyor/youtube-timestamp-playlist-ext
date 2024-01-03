@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Typography } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 
-import { Section } from '../types/playlist';
-import { formatSeconds } from '../helpers';
+import { Section } from '../../types/playlist';
+import { formatSeconds } from '../../helpers';
 
 type SectionFormProps = {
   onAddSection: (section: Section) => void;
@@ -48,19 +48,48 @@ export const SectionForm = ({ onAddSection }: SectionFormProps) => {
 
   return (
     <div>
-      <Typography gutterBottom>Section title</Typography>
-      <input type="text" onChange={handleTitleChange} />
-      <div style={{ display: 'flex' }}>
-        <Typography gutterBottom>Start</Typography>
-        <input type="text" onChange={() => {}} value={formatSeconds(form.startSecond)} />
-        <button onClick={setCurrentPositionAsStart}>current position</button>
-      </div>
-      <div style={{ display: 'flex' }}>
-        <Typography gutterBottom>End</Typography>
-        <input type="text" onChange={() => {}} value={formatSeconds(form.endSecond)} />
-        <button onClick={setCurrentPositionAsEnd}>current position</button>
-      </div>
-      <button onClick={handleAddSection}>Add section</button>
+      <Box sx={{ mb: 2 }}>
+        <TextField
+          label="Section title"
+          variant="outlined"
+          size="small"
+          onChange={handleTitleChange}
+        />
+      </Box>
+
+      <Box sx={{ mb: 2, display: 'flex' }}>
+        <Box sx={{ mr: 2 }}>
+          <TextField
+            label="Start"
+            variant="outlined"
+            size="small"
+            onChange={() => {}}
+            value={formatSeconds(form.startSecond)}
+          />
+        </Box>
+        <Button variant="contained" onClick={setCurrentPositionAsStart}>
+          Current position
+        </Button>
+      </Box>
+
+      <Box sx={{ mb: 2, display: 'flex' }}>
+        <Box sx={{ mr: 2 }}>
+          <TextField
+            label="End"
+            variant="outlined"
+            size="small"
+            onChange={() => {}}
+            value={formatSeconds(form.endSecond)}
+          />
+        </Box>
+        <Button variant="contained" onClick={setCurrentPositionAsEnd}>
+          Current position
+        </Button>
+      </Box>
+
+      <Button variant="contained" onClick={handleAddSection}>
+        Add section
+      </Button>
     </div>
   );
 };

@@ -1,6 +1,18 @@
 import React from 'react';
-import { IconButton, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 import { SectionForm } from './sectionForm';
 import { Playlist, Section } from '../../types/playlist';
@@ -19,31 +31,60 @@ export const SectionComponent = ({
 }: SectionComponentProps) => {
   return (
     <div>
-      <button onClick={onBackToPlaylist}>Back to playlist</button>
-      <List>
-        {playlist?.sections?.map((section) => {
-          return (
-            <ListItem
-              disablePadding
-              key={section.title}
-              secondaryAction={
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              }
-            >
-              <ListItemButton>
-                <ListItemText
-                  primary={`${section.title} ${formatSeconds(
-                    section.startSecond,
-                  )} - ${formatSeconds(section.endSecond)}`}
-                />
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
-      </List>
-      <SectionForm onAddSection={onAddSection} />
+      <Box sx={{ mb: 2 }}>
+        <Button onClick={onBackToPlaylist} variant="outlined" startIcon={<ArrowBackIosIcon />}>
+          Back to playlist
+        </Button>
+      </Box>
+
+      <Box sx={{ mb: 2 }}>
+        <Card>
+          <CardContent>
+            <Box sx={{ ml: 2 }}>
+              <Typography variant="h5" gutterBottom>
+                Sections:
+              </Typography>
+            </Box>
+
+            <List>
+              {playlist?.sections?.map((section) => {
+                return (
+                  <ListItem
+                    disablePadding
+                    key={section.title}
+                    secondaryAction={
+                      <IconButton edge="end" aria-label="delete">
+                        <DeleteIcon />
+                      </IconButton>
+                    }
+                  >
+                    <ListItemButton>
+                      <ListItemText
+                        primary={
+                          <Box sx={{ display: 'flex' }}>
+                            <Box>{section.title}</Box>
+                            <Box sx={{ ml: 'auto' }}>
+                              {`${formatSeconds(section.startSecond)} - ${formatSeconds(
+                                section.endSecond,
+                              )}`}
+                            </Box>
+                          </Box>
+                        }
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </CardContent>
+        </Card>
+      </Box>
+
+      <Card>
+        <CardContent>
+          <SectionForm onAddSection={onAddSection} />
+        </CardContent>
+      </Card>
     </div>
   );
 };

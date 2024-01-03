@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import {
+  Box,
   Button,
+  Card,
+  CardContent,
   Grid,
   List,
   ListItem,
@@ -35,17 +38,23 @@ export const PlaylistComponent = ({
 
   return (
     <div>
-      <List>
-        {playlists.map((playlist, index) => {
-          return (
-            <ListItem disablePadding key={playlist.title}>
-              <ListItemButton onClick={() => handlePlaylistClick(index)}>
-                <ListItemText primary={playlist.title} />
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
-      </List>
+      <Box sx={{ mb: 2 }}>
+        <Card>
+          <CardContent>
+            <List>
+              {playlists.map((playlist, index) => {
+                return (
+                  <ListItem disablePadding key={playlist.title}>
+                    <ListItemButton onClick={() => handlePlaylistClick(index)}>
+                      <ListItemText primary={playlist.title} />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </CardContent>
+        </Card>
+      </Box>
 
       <div>
         <Grid container spacing={2}>
@@ -58,7 +67,7 @@ export const PlaylistComponent = ({
               onChange={(e) => setPlaylistName(e.target.value)}
             />
           </Grid>
-          <Grid xs={2} item>
+          <Grid xs={3} item>
             <Button variant="contained" onClick={handleAddPlaylist}>
               Add playlist
             </Button>
