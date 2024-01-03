@@ -57,6 +57,11 @@ export const App = () => {
     browser.storage.local.set({ playlists: newPlaylist });
   };
 
+  const handleSavePlaylist = (newPlaylist: Playlist[]) => {
+    setPlaylists(newPlaylist);
+    browser.storage.local.set({ playlists: newPlaylist });
+  };
+
   if (view === 'playlist') {
     return (
       <PlaylistComponent
@@ -64,6 +69,7 @@ export const App = () => {
         onAddPlaylist={handleAddPlaylist}
         onPlaylistClick={handlePlaylistClick}
         onDeletePlaylist={handeDeletePlaylist}
+        onSavePlaylist={handleSavePlaylist}
       />
     );
   }

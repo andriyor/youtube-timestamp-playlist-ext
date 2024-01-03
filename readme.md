@@ -12,5 +12,5 @@
  - [ ] edit section time
  - [ ] delete sections
  - [x] delete playlist
- - [ ] edit playlist name
+ - [x] edit playlist name
  - [ ] import/export playlist
