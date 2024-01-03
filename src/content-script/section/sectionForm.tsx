@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, Grid, TextField } from '@mui/material';
 
 import { Section } from '../../types/playlist';
-import { formatSeconds } from '../../helpers';
+import { formatSeconds, parseTimeStampToSeconds } from '../../helpers';
 
 type SectionFormProps = {
   onAddSection: (section: Section) => void;
@@ -54,6 +54,22 @@ export const SectionForm = ({ onAddSection }: SectionFormProps) => {
     });
   };
 
+  const handleStartChange = (timestamp: string) => {
+    const startSecond = parseTimeStampToSeconds(timestamp);
+    setForm({
+      ...form,
+      startSecond,
+    });
+  };
+
+  const handleEndChange = (timestamp: string) => {
+    const endSecond = parseTimeStampToSeconds(timestamp);
+    setForm({
+      ...form,
+      endSecond,
+    });
+  };
+
   return (
     <div>
       <Box sx={{ mb: 2 }}>
@@ -82,7 +98,7 @@ export const SectionForm = ({ onAddSection }: SectionFormProps) => {
             label="Start"
             variant="outlined"
             size="small"
-            onChange={() => {}}
+            onChange={(e) => handleStartChange(e.target.value)}
             value={formatSeconds(form.startSecond)}
           />
         </Box>
@@ -97,7 +113,7 @@ export const SectionForm = ({ onAddSection }: SectionFormProps) => {
             label="End"
             variant="outlined"
             size="small"
-            onChange={() => {}}
+            onChange={(e) => handleEndChange(e.target.value)}
             value={formatSeconds(form.endSecond)}
           />
         </Box>
