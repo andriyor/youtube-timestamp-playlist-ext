@@ -9,7 +9,7 @@ import {
   TextField,
 } from '@mui/material';
 
-import { Playlist } from '../types/playlist';
+import { Playlist } from '../../types/playlist';
 
 type PlaylistComponentProps = {
   playlists: Playlist[];

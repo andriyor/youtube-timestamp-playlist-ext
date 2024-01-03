@@ -3,8 +3,8 @@ import { IconButton, List, ListItem, ListItemButton, ListItemText } from '@mui/m
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { SectionForm } from './sectionForm';
-import { Playlist, Section } from '../types/playlist';
-import { formatSeconds } from '../helpers';
+import { Playlist, Section } from '../../types/playlist';
+import { formatSeconds } from '../../helpers';
 
 type SectionComponentProps = {
   playlist: Playlist;
@@ -12,7 +12,11 @@ type SectionComponentProps = {
   onBackToPlaylist: () => void;
 };
 
-export const SectionComponent = ({ playlist, onAddSection, onBackToPlaylist }: SectionComponentProps) => {
+export const SectionComponent = ({
+  playlist,
+  onAddSection,
+  onBackToPlaylist,
+}: SectionComponentProps) => {
   return (
     <div>
       <button onClick={onBackToPlaylist}>Back to playlist</button>
@@ -30,9 +34,9 @@ export const SectionComponent = ({ playlist, onAddSection, onBackToPlaylist }: S
             >
               <ListItemButton>
                 <ListItemText
-                  primary={`${section.title} ${formatSeconds(section.startSecond)} - ${formatSeconds(
-                    section.endSecond,
-                  )}`}
+                  primary={`${section.title} ${formatSeconds(
+                    section.startSecond,
+                  )} - ${formatSeconds(section.endSecond)}`}
                 />
               </ListItemButton>
             </ListItem>
