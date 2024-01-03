@@ -49,12 +49,21 @@ export const App = () => {
     setView('playlist');
   };
 
+  const handeDeletePlaylist = (playlistIndex: number) => {
+    const newPlaylist = [...playlists];
+    newPlaylist.splice(playlistIndex, 1);
+
+    setPlaylists(newPlaylist);
+    browser.storage.local.set({ playlists: newPlaylist });
+  };
+
   if (view === 'playlist') {
     return (
       <PlaylistComponent
         playlists={playlists}
         onAddPlaylist={handleAddPlaylist}
         onPlaylistClick={handlePlaylistClick}
+        onDeletePlaylist={handeDeletePlaylist}
       />
     );
   }

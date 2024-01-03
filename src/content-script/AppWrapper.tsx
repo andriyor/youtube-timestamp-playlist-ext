@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, createTheme, ThemeProvider } from '@mui/material';
+import { Box, Card, CardContent, createTheme, ThemeProvider } from '@mui/material';
 
 import { App } from './App';
 
@@ -12,11 +12,13 @@ export const AppWrapper = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Card>
-        <CardContent>
-          <App />
-        </CardContent>
-      </Card>
+      <Box sx={{ mt: 2 }}>
+        <Card>
+          <CardContent>
+            <App />
+          </CardContent>
+        </Card>
+      </Box>
     </ThemeProvider>
   );
 };

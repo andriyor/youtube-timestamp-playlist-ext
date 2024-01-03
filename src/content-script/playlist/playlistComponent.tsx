@@ -5,35 +5,40 @@ import {
   Card,
   CardContent,
   Grid,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
   TextField,
+  Typography,
 } from '@mui/material';
 
 import { Playlist } from '../../types/playlist';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 type PlaylistComponentProps = {
   playlists: Playlist[];
   onAddPlaylist: (playlistName: string) => void;
   onPlaylistClick: (playlistIndex: number) => void;
+  onDeletePlaylist: (playlistIndex: number) => void;
 };
 
 export const PlaylistComponent = ({
   playlists,
   onAddPlaylist,
   onPlaylistClick,
+  onDeletePlaylist,
 }: PlaylistComponentProps) => {
-  const [playlistName, setPlaylistName] = useState('');
+  const [playlistTitle, setPlaylistTitle] = useState('');
 
   const handlePlaylistClick = (playlistIndex: number) => {
     onPlaylistClick(playlistIndex);
   };
 
   const handleAddPlaylist = () => {
-    setPlaylistName('');
-    onAddPlaylist(playlistName);
+    setPlaylistTitle('');
+    onAddPlaylist(playlistTitle);
   };
 
   return (
@@ -41,10 +46,24 @@ export const PlaylistComponent = ({
       <Box sx={{ mb: 2 }}>
         <Card>
           <CardContent>
+            <Box sx={{ ml: 2 }}>
+              <Typography variant="h5" gutterBottom>
+                Playlists:
+              </Typography>
+            </Box>
+
             <List>
               {playlists.map((playlist, index) => {
                 return (
-                  <ListItem disablePadding key={playlist.title}>
+                  <ListItem
+                    disablePadding
+                    key={playlist.title}
+                    secondaryAction={
+                      <IconButton edge="end" onClick={() => onDeletePlaylist(index)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    }
+                  >
                     <ListItemButton onClick={() => handlePlaylistClick(index)}>
                       <ListItemText primary={playlist.title} />
                     </ListItemButton>
@@ -61,10 +80,11 @@ export const PlaylistComponent = ({
           <Grid xs={4} item>
             <TextField
               fullWidth
-              label="Outlined"
+              label="Playlist title"
               variant="outlined"
               size="small"
-              onChange={(e) => setPlaylistName(e.target.value)}
+              value={playlistTitle}
+              onChange={(e) => setPlaylistTitle(e.target.value)}
             />
           </Grid>
           <Grid xs={3} item>

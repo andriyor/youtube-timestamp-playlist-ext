@@ -7,5 +7,10 @@
 ## TODO
 
  - [x] POC
- - [ ] UI
- - [ ] 
+ - [x] basic UI
+ - [ ] change order of sections
+ - [ ] edit section time
+ - [ ] delete sections
+ - [x] delete playlist
+ - [ ] edit playlist name
+ - [ ] import/export playlist
