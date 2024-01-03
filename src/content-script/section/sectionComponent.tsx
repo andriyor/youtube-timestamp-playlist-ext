@@ -17,6 +17,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { SectionForm } from './sectionForm';
 import { Playlist, Section } from '../../types/playlist';
 import { formatSeconds } from '../../helpers';
+import { SectionListComponent } from './sectionListComponent';
 
 type SectionComponentProps = {
   playlist: Playlist;
@@ -38,46 +39,7 @@ export const SectionComponent = ({
       </Box>
 
       <Box sx={{ mb: 2 }}>
-        <Card>
-          <CardContent>
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="h5" gutterBottom>
-                Sections:
-              </Typography>
-            </Box>
-
-            <List>
-              {playlist?.sections?.map((section) => {
-                return (
-                  <ListItem
-                    disablePadding
-                    key={section.title}
-                    secondaryAction={
-                      <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon />
-                      </IconButton>
-                    }
-                  >
-                    <ListItemButton>
-                      <ListItemText
-                        primary={
-                          <Box sx={{ display: 'flex' }}>
-                            <Box>{section.title}</Box>
-                            <Box sx={{ ml: 'auto' }}>
-                              {`${formatSeconds(section.startSecond)} - ${formatSeconds(
-                                section.endSecond,
-                              )}`}
-                            </Box>
-                          </Box>
-                        }
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
-            </List>
-          </CardContent>
-        </Card>
+        <SectionListComponent playlist={playlist} />
       </Box>
 
       <Card>
