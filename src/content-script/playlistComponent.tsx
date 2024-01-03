@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import {
+  Button,
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  TextField,
+} from '@mui/material';
 
 import { Playlist } from '../types/playlist';
 
@@ -9,7 +17,11 @@ type PlaylistComponentProps = {
   onPlaylistClick: (playlistIndex: number) => void;
 };
 
-export const PlaylistComponent = ({ playlists, onAddPlaylist, onPlaylistClick }: PlaylistComponentProps) => {
+export const PlaylistComponent = ({
+  playlists,
+  onAddPlaylist,
+  onPlaylistClick,
+}: PlaylistComponentProps) => {
   const [playlistName, setPlaylistName] = useState('');
 
   const handlePlaylistClick = (playlistIndex: number) => {
@@ -36,8 +48,22 @@ export const PlaylistComponent = ({ playlists, onAddPlaylist, onPlaylistClick }:
       </List>
 
       <div>
-        <input type="text" onChange={(e) => setPlaylistName(e.target.value)} />
-        <button onClick={handleAddPlaylist}>add playlist</button>
+        <Grid container spacing={2}>
+          <Grid xs={4} item>
+            <TextField
+              fullWidth
+              label="Outlined"
+              variant="outlined"
+              size="small"
+              onChange={(e) => setPlaylistName(e.target.value)}
+            />
+          </Grid>
+          <Grid xs={2} item>
+            <Button variant="contained" onClick={handleAddPlaylist}>
+              Add playlist
+            </Button>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );
