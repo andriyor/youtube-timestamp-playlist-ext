@@ -3,6 +3,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { AppWrapper } from './content-script/AppWrapper';
+import { HTMLElementEvent } from './types/HTMLElementEvent';
 
 (function () {
   /**
@@ -19,8 +20,8 @@ import { AppWrapper } from './content-script/AppWrapper';
     if (message.command === 'track') {
       const video = document.querySelector('video');
       return new Promise<void>((resolve) => {
-        video.addEventListener('timeupdate', (e: Event) => {
-          const videoElement = e.target as HTMLVideoElement;
+        video.addEventListener('timeupdate', (e: HTMLElementEvent<HTMLVideoElement>) => {
+          const videoElement = e.target;
           console.log(videoElement.currentTime);
           console.log(message.endSecond);
           console.log('');
