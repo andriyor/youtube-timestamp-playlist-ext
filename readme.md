@@ -6,13 +6,13 @@
 
 ## TODO
 
- - [x] POC
- - [x] basic UI
- - [ ] change order of sections
- - [x] set section time from video position
- - [ ] edit time manually
- - [ ] edit section time
- - [ ] delete sections
- - [x] delete playlist
- - [x] edit playlist name
- - [ ] import/export playlist
+- [x] POC
+- [x] basic UI
+- [x] set section time from video position
+- [x] delete playlist
+- [x] edit playlist name
+- [ ] change order of sections
+- [ ] edit time manually
+- [ ] edit section time
+- [ ] delete sections
+- [ ] import/export playlist
