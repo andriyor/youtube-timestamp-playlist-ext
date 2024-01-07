@@ -1,4 +1,5 @@
 export type Section = {
+  id: string;
   title: string;
   videoId: string;
   startSecond: number;

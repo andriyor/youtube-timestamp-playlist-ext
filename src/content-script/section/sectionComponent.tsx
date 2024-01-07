@@ -1,27 +1,15 @@
 import React from 'react';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Typography,
-} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Box, Button, Card, CardContent } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 import { SectionForm } from './sectionForm';
 import { Playlist, Section } from '../../types/playlist';
-import { formatSeconds } from '../../helpers';
 import { SectionListComponent } from './sectionListComponent';
 
 type SectionComponentProps = {
   playlist: Playlist;
   onAddSection: (section: Section) => void;
+  onSectionsChange: (sections: Section[]) => void;
   onBackToPlaylist: () => void;
 };
 
@@ -29,6 +17,7 @@ export const SectionComponent = ({
   playlist,
   onAddSection,
   onBackToPlaylist,
+  onSectionsChange,
 }: SectionComponentProps) => {
   return (
     <div>
@@ -39,7 +28,7 @@ export const SectionComponent = ({
       </Box>
 
       <Box sx={{ mb: 2 }}>
-        <SectionListComponent playlist={playlist} />
+        <SectionListComponent playlist={playlist} onSectionsChange={onSectionsChange} />
       </Box>
 
       <Card>

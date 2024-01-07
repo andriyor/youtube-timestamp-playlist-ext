@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { nanoid } from 'nanoid';
 import { Box, Button, Grid, TextField } from '@mui/material';
 
 import { Section } from '../../types/playlist';
@@ -13,6 +14,7 @@ export const SectionForm = ({ onAddSection }: SectionFormProps) => {
   const videoId = params.get('v');
 
   const [form, setForm] = useState<Section>({
+    id: '',
     videoId: videoId,
     title: '',
     startSecond: 0,
@@ -43,7 +45,10 @@ export const SectionForm = ({ onAddSection }: SectionFormProps) => {
   };
 
   const handleAddSection = () => {
-    onAddSection(form);
+    onAddSection({
+      ...form,
+      id: nanoid(),
+    });
   };
 
   const setCurrentTitle = () => {

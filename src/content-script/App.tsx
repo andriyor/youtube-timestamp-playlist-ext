@@ -62,6 +62,14 @@ export const App = () => {
     browser.storage.local.set({ playlists: newPlaylist });
   };
 
+  const handleSectionsChange = (sections: Section[]) => {
+    const newPlaylist = [...playlists];
+    newPlaylist[selectedPlaylist].sections = sections;
+
+    setPlaylists(newPlaylist);
+    browser.storage.local.set({ playlists: newPlaylist });
+  };
+
   if (view === 'playlist') {
     return (
       <PlaylistComponent
@@ -78,6 +86,7 @@ export const App = () => {
       <SectionComponent
         playlist={playlists[selectedPlaylist]}
         onAddSection={handleAddSection}
+        onSectionsChange={handleSectionsChange}
         onBackToPlaylist={handleBackToPlaylist}
       />
     );
