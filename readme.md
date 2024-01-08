@@ -16,12 +16,13 @@
 - [x] change order of sections
 - [ ] edit time manually
 - [ ] edit section time
-- [ ] delete sections
+- [ ] delete section
 - [ ] import/export playlist
 
 ### Tech debt
 
-- [ ] try [zustand](https://github.com/pmndrs/zustand)
+- [x] try [zustand](https://github.com/pmndrs/zustand)
 - [ ] try [parcel](https://parceljs.org/recipes/web-extension/) 
 - [ ] strict eslint rules
 - [ ] lint file names convention
+- [ ] unit tests

@@ -14,31 +14,24 @@ import {
   Typography,
 } from '@mui/material';
 
-import { Playlist } from '../../types/playlist';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 
-type PlaylistComponentProps = {
-  playlists: Playlist[];
-  onAddPlaylist: (playlistName: string) => void;
-  onPlaylistClick: (playlistIndex: number) => void;
-  onDeletePlaylist: (playlistIndex: number) => void;
-  onSavePlaylist: (playlist: Playlist[]) => void;
-};
+import { Playlist } from '../../types/playlist';
+import { usePlaylistStore } from '../../store/usePlaylistStore';
+import { useViewStore } from '../../store/useView';
 
 type ViewMode = 'VIEW' | 'EDIT';
 
-export const PlaylistComponent = ({
-  playlists,
-  onAddPlaylist,
-  onPlaylistClick,
-  onDeletePlaylist,
-  onSavePlaylist,
-}: PlaylistComponentProps) => {
+export const PlaylistComponent = () => {
   const [playlistTitle, setPlaylistTitle] = useState('');
   const [playlistViewModes, setPlaylistViewModes] = useState<ViewMode[]>([]);
   const [immediatePlaylists, setImmediatePlaylists] = useState<Playlist[]>([]);
+  const { addPlaylist, playlists, updatePlaylists, deletePlaylist } = usePlaylistStore(
+    (state) => state,
+  );
+  const { setView, setSelected } = useViewStore((state) => state);
 
   useEffect(() => {
     const playlistViewModes = playlists.map((_) => 'VIEW' as ViewMode);
@@ -53,22 +46,23 @@ export const PlaylistComponent = ({
   };
 
   const savePlayListName = () => {
-    onSavePlaylist([...immediatePlaylists]);
-  };
-
-  const handlePlaylistClick = (playlistIndex: number) => {
-    onPlaylistClick(playlistIndex);
+    updatePlaylists([...immediatePlaylists]);
   };
 
   const handleAddPlaylist = () => {
     setPlaylistTitle('');
-    onAddPlaylist(playlistTitle);
+    addPlaylist(playlistTitle);
   };
 
   const handlePlaylistNameChange = (playlistIndex: number, newPlaylistTitle: string) => {
     const newImmediatePlaylist = [...immediatePlaylists];
     newImmediatePlaylist[playlistIndex].title = newPlaylistTitle;
     setImmediatePlaylists(newImmediatePlaylist);
+  };
+
+  const handlePlaylistClick = (playlistIndex: number) => {
+    setSelected(playlistIndex);
+    setView('sections');
   };
 
   return (
@@ -115,7 +109,7 @@ export const PlaylistComponent = ({
                           )}
                         </Box>
                         <Box>
-                          <IconButton edge="end" onClick={() => onDeletePlaylist(playlistIndex)}>
+                          <IconButton edge="end" onClick={() => deletePlaylist(playlistIndex)}>
                             <DeleteIcon />
                           </IconButton>
                         </Box>

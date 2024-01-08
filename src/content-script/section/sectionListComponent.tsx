@@ -16,15 +16,15 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 
-import { Playlist, Section } from '../../types/playlist';
 import { SortableSection } from './sortableSection';
+import { usePlaylistStore } from '../../store/usePlaylistStore';
+import { useViewStore } from '../../store/useView';
 
-type SectionListComponentProps = {
-  playlist: Playlist;
-  onSectionsChange: (sections: Section[]) => void;
-};
+export const SectionListComponent = () => {
+  const { playlists, playlistSectionsChange } = usePlaylistStore((state) => state);
+  const { selectedPlaylistIndex } = useViewStore((state) => state);
+  const selectedPlaylist = playlists[selectedPlaylistIndex];
 
-export const SectionListComponent = ({ playlist, onSectionsChange }: SectionListComponentProps) => {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -34,13 +34,13 @@ export const SectionListComponent = ({ playlist, onSectionsChange }: SectionList
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-    const newSections = playlist.sections;
+    const newSections = selectedPlaylist.sections;
 
     if (active.id !== over.id) {
       const oldIndex = newSections.findIndex((section) => section.id === active.id);
       const newIndex = newSections.findIndex((section) => section.id === over.id);
       const changedSections = arrayMove(newSections, oldIndex, newIndex);
-      onSectionsChange(changedSections);
+      playlistSectionsChange(selectedPlaylistIndex, changedSections);
     }
   };
 
@@ -54,9 +54,9 @@ export const SectionListComponent = ({ playlist, onSectionsChange }: SectionList
         </Box>
 
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={playlist.sections} strategy={verticalListSortingStrategy}>
+          <SortableContext items={selectedPlaylist.sections} strategy={verticalListSortingStrategy}>
             <List>
-              {playlist.sections.map((section) => (
+              {selectedPlaylist.sections.map((section) => (
                 <SortableSection key={section.id} section={section} />
               ))}
             </List>
