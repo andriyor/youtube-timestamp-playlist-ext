@@ -5,18 +5,15 @@ import { Playlist, Section } from '../types/playlist';
 
 interface PlaylistActions {
   addPlaylist: (playlistName: string) => void;
-  addSectionToCurrentPlaylist: (section: Section) => void;
+  addSectionToPlaylist: (playlistIndex: number, section: Section) => void;
   deletePlaylist: (playlistIndex: number) => void;
   updatePlaylists: (newPlaylist: Playlist[]) => void;
-  playlistSectionsChange: (sections: Section[]) => void;
+  playlistSectionsChange: (playlistIndex: number, sections: Section[]) => void;
 }
 
 interface PlaylistState {
   playlists: Playlist[];
   getPlaylistFromStorage: () => void;
-
-  selectedPlaylistIndex: number;
-  setSelected: (playlistIndex: number) => void;
 }
 
 const updatePlaylists = (newPlaylists: Playlist[]) => {
@@ -34,10 +31,6 @@ export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) 
     });
   },
 
-  selectedPlaylistIndex: 0,
-  setSelected: (playlistIndex: number) =>
-    set((state) => ({ selectedPlaylistIndex: playlistIndex })),
-
   addPlaylist: (playlistName: string) => {
     const newPlaylist: Playlist = { title: playlistName, sections: [] };
     set((state) => {
@@ -45,17 +38,13 @@ export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) 
       return updatePlaylists(newPlaylists);
     });
   },
-  addSectionToCurrentPlaylist: (section: Section) => {
+  addSectionToPlaylist: (playlistIndex: number, section: Section) => {
     set((state) => {
-      const selectedPlaylistIndex = state.selectedPlaylistIndex;
       const newPlaylists = [...state.playlists];
-      if (newPlaylists[selectedPlaylistIndex].sections) {
-        newPlaylists[selectedPlaylistIndex].sections = [
-          ...newPlaylists[selectedPlaylistIndex].sections,
-          section,
-        ];
+      if (newPlaylists[playlistIndex].sections) {
+        newPlaylists[playlistIndex].sections = [...newPlaylists[playlistIndex].sections, section];
       } else {
-        newPlaylists[selectedPlaylistIndex].sections = [section];
+        newPlaylists[playlistIndex].sections = [section];
       }
 
       return updatePlaylists(newPlaylists);
@@ -74,10 +63,10 @@ export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) 
       return updatePlaylists(newPlaylists);
     });
   },
-  playlistSectionsChange: (sections: Section[]) => {
+  playlistSectionsChange: (playlistIndex: number, sections: Section[]) => {
     set((state) => {
       const newPlaylists = [...state.playlists];
-      newPlaylists[state.selectedPlaylistIndex].sections = sections;
+      newPlaylists[playlistIndex].sections = sections;
 
       return updatePlaylists(newPlaylists);
     });

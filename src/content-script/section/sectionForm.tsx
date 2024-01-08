@@ -5,9 +5,11 @@ import { Box, Button, Grid, TextField } from '@mui/material';
 import { Section } from '../../types/playlist';
 import { formatSeconds, parseTimeStampToSeconds } from '../../helpers';
 import { usePlaylistStore } from '../../store/useStore';
+import { useViewStore } from '../../store/useView';
 
 export const SectionForm = () => {
-  const { addSectionToCurrentPlaylist } = usePlaylistStore((state) => state);
+  const { addSectionToPlaylist } = usePlaylistStore((state) => state);
+  const { selectedPlaylistIndex } = useViewStore((state) => state);
   const params = new URL(document.location.href).searchParams;
   const videoId = params.get('v');
 
@@ -43,7 +45,7 @@ export const SectionForm = () => {
   };
 
   const handleAddSection = () => {
-    addSectionToCurrentPlaylist({
+    addSectionToPlaylist(selectedPlaylistIndex, {
       ...form,
       id: nanoid(),
     });

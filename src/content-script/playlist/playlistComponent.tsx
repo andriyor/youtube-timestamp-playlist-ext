@@ -28,10 +28,10 @@ export const PlaylistComponent = () => {
   const [playlistTitle, setPlaylistTitle] = useState('');
   const [playlistViewModes, setPlaylistViewModes] = useState<ViewMode[]>([]);
   const [immediatePlaylists, setImmediatePlaylists] = useState<Playlist[]>([]);
-  const { addPlaylist, playlists, updatePlaylists, deletePlaylist, setSelected } = usePlaylistStore(
+  const { addPlaylist, playlists, updatePlaylists, deletePlaylist } = usePlaylistStore(
     (state) => state,
   );
-  const { setView } = useViewStore((state) => state);
+  const { setView, setSelected } = useViewStore((state) => state);
 
   useEffect(() => {
     const playlistViewModes = playlists.map((_) => 'VIEW' as ViewMode);

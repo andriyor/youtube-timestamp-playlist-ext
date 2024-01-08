@@ -18,11 +18,11 @@ import {
 
 import { SortableSection } from './sortableSection';
 import { usePlaylistStore } from '../../store/useStore';
+import { useViewStore } from '../../store/useView';
 
 export const SectionListComponent = () => {
-  const { selectedPlaylistIndex, playlists, playlistSectionsChange } = usePlaylistStore(
-    (state) => state,
-  );
+  const { playlists, playlistSectionsChange } = usePlaylistStore((state) => state);
+  const { selectedPlaylistIndex } = useViewStore((state) => state);
   const selectedPlaylist = playlists[selectedPlaylistIndex];
 
   const sensors = useSensors(
@@ -40,7 +40,7 @@ export const SectionListComponent = () => {
       const oldIndex = newSections.findIndex((section) => section.id === active.id);
       const newIndex = newSections.findIndex((section) => section.id === over.id);
       const changedSections = arrayMove(newSections, oldIndex, newIndex);
-      playlistSectionsChange(changedSections);
+      playlistSectionsChange(selectedPlaylistIndex, changedSections);
     }
   };
 
