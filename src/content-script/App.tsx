@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { PlaylistComponent } from './playlist/playlistComponent';
 import { SectionComponent } from './section/sectionComponent';
-import { usePlaylistStore } from '../store/useStore';
+import { usePlaylistStore } from '../store/usePlaylistStore';
 import { useViewStore } from '../store/useView';
 
 export const App = () => {

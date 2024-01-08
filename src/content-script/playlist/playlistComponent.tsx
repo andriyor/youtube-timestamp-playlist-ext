@@ -19,7 +19,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 
 import { Playlist } from '../../types/playlist';
-import { usePlaylistStore } from '../../store/useStore';
+import { usePlaylistStore } from '../../store/usePlaylistStore';
 import { useViewStore } from '../../store/useView';
 
 type ViewMode = 'VIEW' | 'EDIT';

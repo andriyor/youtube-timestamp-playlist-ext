@@ -17,7 +17,7 @@ import {
 } from '@dnd-kit/core';
 
 import { SortableSection } from './sortableSection';
-import { usePlaylistStore } from '../../store/useStore';
+import { usePlaylistStore } from '../../store/usePlaylistStore';
 import { useViewStore } from '../../store/useView';
 
 export const SectionListComponent = () => {

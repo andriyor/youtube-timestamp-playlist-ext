@@ -4,7 +4,7 @@ import { Box, Button, Grid, TextField } from '@mui/material';
 
 import { Section } from '../../types/playlist';
 import { formatSeconds, parseTimeStampToSeconds } from '../../helpers';
-import { usePlaylistStore } from '../../store/useStore';
+import { usePlaylistStore } from '../../store/usePlaylistStore';
 import { useViewStore } from '../../store/useView';
 
 export const SectionForm = () => {
