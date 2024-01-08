@@ -12,9 +12,10 @@ import { formatSeconds } from '../../helpers';
 
 type SortableSectionProps = {
   section: Section;
+  onSectionDelete: () => void;
 };
 
-export const SortableSection = ({ section }: SortableSectionProps) => {
+export const SortableSection = ({ section, onSectionDelete }: SortableSectionProps) => {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: section.id,
   });
@@ -43,7 +44,7 @@ export const SortableSection = ({ section }: SortableSectionProps) => {
 
           <Box sx={{ display: 'flex', ml: 'auto' }}>
             <Box sx={{ mr: 2 }}>
-              <IconButton edge="end" aria-label="delete">
+              <IconButton edge="end" aria-label="delete" onClick={onSectionDelete}>
                 <DeleteIcon />
               </IconButton>
             </Box>

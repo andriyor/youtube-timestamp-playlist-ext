@@ -21,7 +21,7 @@ import { usePlaylistStore } from '../../store/usePlaylistStore';
 import { useViewStore } from '../../store/useView';
 
 export const SectionListComponent = () => {
-  const { playlists, playlistSectionsChange } = usePlaylistStore((state) => state);
+  const { playlists, playlistSectionsChange, deleteSection } = usePlaylistStore((state) => state);
   const { selectedPlaylistIndex } = useViewStore((state) => state);
   const selectedPlaylist = playlists[selectedPlaylistIndex];
 
@@ -44,6 +44,10 @@ export const SectionListComponent = () => {
     }
   };
 
+  const handleSectionDelete = (sectionIndex: number) => {
+    deleteSection(selectedPlaylistIndex, sectionIndex);
+  };
+
   return (
     <Card>
       <CardContent>
@@ -56,8 +60,12 @@ export const SectionListComponent = () => {
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={selectedPlaylist.sections} strategy={verticalListSortingStrategy}>
             <List>
-              {selectedPlaylist.sections.map((section) => (
-                <SortableSection key={section.id} section={section} />
+              {selectedPlaylist.sections.map((section, sectionIndex) => (
+                <SortableSection
+                  key={section.id}
+                  section={section}
+                  onSectionDelete={() => handleSectionDelete(sectionIndex)}
+                />
               ))}
             </List>
           </SortableContext>

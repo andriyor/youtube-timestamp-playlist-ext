@@ -14,9 +14,9 @@
 - [x] delete playlist
 - [x] edit playlist name
 - [x] change order of sections
+- [x] delete section
 - [ ] edit time manually
 - [ ] edit section time
-- [ ] delete section
 - [ ] import/export playlist
 
 ### Tech debt

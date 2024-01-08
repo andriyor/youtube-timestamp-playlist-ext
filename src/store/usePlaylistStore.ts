@@ -9,6 +9,7 @@ interface PlaylistActions {
   deletePlaylist: (playlistIndex: number) => void;
   updatePlaylists: (newPlaylist: Playlist[]) => void;
   playlistSectionsChange: (playlistIndex: number, sections: Section[]) => void;
+  deleteSection: (playlistIndex: number, sectionIndex: number) => void;
 }
 
 interface PlaylistState {
@@ -67,6 +68,14 @@ export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) 
     set((state) => {
       const newPlaylists = [...state.playlists];
       newPlaylists[playlistIndex].sections = sections;
+
+      return updatePlaylists(newPlaylists);
+    });
+  },
+  deleteSection: (playlistIndex, sectionIndex) => {
+    set((state) => {
+      const newPlaylists = [...state.playlists];
+      newPlaylists[playlistIndex].sections.splice(sectionIndex, 1);
 
       return updatePlaylists(newPlaylists);
     });
