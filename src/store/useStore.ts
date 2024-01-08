@@ -31,14 +31,14 @@ export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) 
     });
   },
 
-  addPlaylist: (playlistName: string) => {
+  addPlaylist: (playlistName) => {
     const newPlaylist: Playlist = { title: playlistName, sections: [] };
     set((state) => {
       const newPlaylists = [...state.playlists, newPlaylist];
       return updatePlaylists(newPlaylists);
     });
   },
-  addSectionToPlaylist: (playlistIndex: number, section: Section) => {
+  addSectionToPlaylist: (playlistIndex, section) => {
     set((state) => {
       const newPlaylists = [...state.playlists];
       if (newPlaylists[playlistIndex].sections) {
@@ -50,7 +50,7 @@ export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) 
       return updatePlaylists(newPlaylists);
     });
   },
-  deletePlaylist: (playlistIndex: number) => {
+  deletePlaylist: (playlistIndex) => {
     set((state) => {
       const newPlaylists = [...state.playlists];
       newPlaylists.splice(playlistIndex, 1);
@@ -58,12 +58,12 @@ export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) 
       return updatePlaylists(newPlaylists);
     });
   },
-  updatePlaylists: (newPlaylists: Playlist[]) => {
+  updatePlaylists: (newPlaylists) => {
     set((state) => {
       return updatePlaylists(newPlaylists);
     });
   },
-  playlistSectionsChange: (playlistIndex: number, sections: Section[]) => {
+  playlistSectionsChange: (playlistIndex, sections) => {
     set((state) => {
       const newPlaylists = [...state.playlists];
       newPlaylists[playlistIndex].sections = sections;

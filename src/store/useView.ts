@@ -12,9 +12,8 @@ interface ViewState {
 
 export const useViewStore = create<ViewState>()((set) => ({
   view: 'playlist',
-  setView: (view: View) => set(() => ({ view: view })),
+  setView: (view) => set(() => ({ view: view })),
 
   selectedPlaylistIndex: 0,
-  setSelected: (playlistIndex: number) =>
-    set((state) => ({ selectedPlaylistIndex: playlistIndex })),
+  setSelected: (playlistIndex) => set((state) => ({ selectedPlaylistIndex: playlistIndex })),
 }));
