@@ -20,6 +20,7 @@ import SaveIcon from '@mui/icons-material/Save';
 
 import { Playlist } from '../../types/playlist';
 import { usePlaylistStore } from '../../store/useStore';
+import { useViewStore } from '../../store/useView';
 
 type ViewMode = 'VIEW' | 'EDIT';
 
@@ -27,8 +28,10 @@ export const PlaylistComponent = () => {
   const [playlistTitle, setPlaylistTitle] = useState('');
   const [playlistViewModes, setPlaylistViewModes] = useState<ViewMode[]>([]);
   const [immediatePlaylists, setImmediatePlaylists] = useState<Playlist[]>([]);
-  const { addPlaylist, playlists, updatePlaylists, deletePlaylist, setSelected, setView } =
-    usePlaylistStore((state) => state);
+  const { addPlaylist, playlists, updatePlaylists, deletePlaylist, setSelected } = usePlaylistStore(
+    (state) => state,
+  );
+  const { setView } = useViewStore((state) => state);
 
   useEffect(() => {
     const playlistViewModes = playlists.map((_) => 'VIEW' as ViewMode);

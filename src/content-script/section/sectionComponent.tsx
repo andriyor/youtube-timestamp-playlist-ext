@@ -4,10 +4,10 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 import { SectionForm } from './sectionForm';
 import { SectionListComponent } from './sectionListComponent';
-import { usePlaylistStore } from '../../store/useStore';
+import { useViewStore } from '../../store/useView';
 
 export const SectionComponent = () => {
-  const { setView } = usePlaylistStore((state) => state);
+  const { setView } = useViewStore((state) => state);
 
   const handleBackToPlaylist = () => setView('playlist');
 

@@ -3,8 +3,6 @@ import { create } from 'zustand';
 
 import { Playlist, Section } from '../types/playlist';
 
-export type View = 'playlist' | 'sections';
-
 interface PlaylistActions {
   addPlaylist: (playlistName: string) => void;
   addSectionToCurrentPlaylist: (section: Section) => void;
@@ -15,13 +13,10 @@ interface PlaylistActions {
 
 interface PlaylistState {
   playlists: Playlist[];
-  initialize: () => void;
+  getPlaylistFromStorage: () => void;
 
   selectedPlaylistIndex: number;
   setSelected: (playlistIndex: number) => void;
-
-  view: View;
-  setView: (view: View) => void;
 }
 
 const updatePlaylists = (newPlaylists: Playlist[]) => {
@@ -31,16 +26,13 @@ const updatePlaylists = (newPlaylists: Playlist[]) => {
 
 export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) => ({
   playlists: [],
-  initialize: () => {
+  getPlaylistFromStorage: () => {
     browser.storage.local.get().then((res) => {
       if (res.playlists) {
         set((state) => ({ playlists: res.playlists }));
       }
     });
   },
-
-  view: 'playlist',
-  setView: (view: View) => set(() => ({ view: view })),
 
   selectedPlaylistIndex: 0,
   setSelected: (playlistIndex: number) =>
