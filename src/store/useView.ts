@@ -15,5 +15,5 @@ export const useViewStore = create<ViewState>()((set) => ({
   setView: (view) => set(() => ({ view: view })),
 
   selectedPlaylistIndex: 0,
-  setSelected: (playlistIndex) => set((state) => ({ selectedPlaylistIndex: playlistIndex })),
+  setSelected: (playlistIndex) => set(() => ({ selectedPlaylistIndex: playlistIndex })),
 }));
