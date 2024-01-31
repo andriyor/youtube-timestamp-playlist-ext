@@ -15,14 +15,14 @@
 - [x] edit playlist name
 - [x] change order of sections
 - [x] delete section
+- [x] edit section time
 - [ ] edit time manually
-- [ ] edit section time
 - [ ] import/export playlist
 
 ### Tech debt
 
 - [x] try [zustand](https://github.com/pmndrs/zustand)
-- [ ] try [parcel](https://parceljs.org/recipes/web-extension/) 
+- [ ] try [parcel](https://parceljs.org/recipes/web-extension/)
 - [ ] strict eslint rules
 - [ ] lint file names convention
 - [ ] unit tests

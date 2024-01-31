@@ -18,11 +18,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 
-import { Playlist } from '../../types/playlist';
+import { Playlist, ViewMode } from '../../types/playlist';
 import { usePlaylistStore } from '../../store/usePlaylistStore';
 import { useViewStore } from '../../store/useView';
-
-type ViewMode = 'VIEW' | 'EDIT';
 
 export const PlaylistComponent = () => {
   const [playlistTitle, setPlaylistTitle] = useState('');

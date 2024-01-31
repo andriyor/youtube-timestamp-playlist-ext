@@ -19,6 +19,7 @@ import {
 import { SortableSection } from './sortableSection';
 import { usePlaylistStore } from '../../store/usePlaylistStore';
 import { useViewStore } from '../../store/useView';
+import { Section } from '../../types/playlist';
 
 export const SectionListComponent = () => {
   const { playlists, playlistSectionsChange, deleteSection } = usePlaylistStore((state) => state);
@@ -34,7 +35,7 @@ export const SectionListComponent = () => {
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-    const newSections = selectedPlaylist.sections;
+    const newSections = [...selectedPlaylist.sections];
 
     if (active.id !== over.id) {
       const oldIndex = newSections.findIndex((section) => section.id === active.id);
@@ -46,6 +47,13 @@ export const SectionListComponent = () => {
 
   const handleSectionDelete = (sectionIndex: number) => {
     deleteSection(selectedPlaylistIndex, sectionIndex);
+  };
+
+  const handleEdit = (sectionIndex: number, form: Section) => {
+    const newSections = [...selectedPlaylist.sections];
+
+    newSections[sectionIndex] = form;
+    playlistSectionsChange(selectedPlaylistIndex, newSections);
   };
 
   return (
@@ -65,6 +73,7 @@ export const SectionListComponent = () => {
                   key={section.id}
                   section={section}
                   onSectionDelete={() => handleSectionDelete(sectionIndex)}
+                  onEditSection={(form) => handleEdit(sectionIndex, form)}
                 />
               ))}
             </List>

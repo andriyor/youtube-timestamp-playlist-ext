@@ -10,3 +10,5 @@ export type Playlist = {
   title: string;
   sections: Section[];
 };
+
+export type ViewMode = 'VIEW' | 'EDIT';

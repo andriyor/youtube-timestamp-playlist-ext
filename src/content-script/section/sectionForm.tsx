@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Box, Button, Grid, TextField } from '@mui/material';
 
@@ -7,7 +7,12 @@ import { formatSeconds, parseTimeStampToSeconds } from '../../helpers';
 import { usePlaylistStore } from '../../store/usePlaylistStore';
 import { useViewStore } from '../../store/useView';
 
-export const SectionForm = () => {
+type SectionFormProps = {
+  section?: Section;
+  onEditSection?: (form: Section) => void;
+};
+
+export const SectionForm = ({ section, onEditSection }: SectionFormProps) => {
   const { addSectionToPlaylist } = usePlaylistStore((state) => state);
   const { selectedPlaylistIndex } = useViewStore((state) => state);
   const params = new URL(document.location.href).searchParams;
@@ -20,6 +25,12 @@ export const SectionForm = () => {
     startSecond: 0,
     endSecond: 0,
   });
+
+  useEffect(() => {
+    if (section) {
+      setForm(section);
+    }
+  }, [section]);
 
   const setCurrentPositionAsStart = () => {
     const video = document.querySelector('video');
@@ -51,6 +62,10 @@ export const SectionForm = () => {
     });
   };
 
+  const handleUpdateSection = () => {
+    onEditSection(form);
+  };
+
   const setCurrentTitle = () => {
     const title = (document.querySelector('h1.ytd-watch-metadata') as HTMLTitleElement).innerText;
     setForm({
@@ -76,7 +91,7 @@ export const SectionForm = () => {
   };
 
   return (
-    <div>
+    <Box sx={{ flex: 1 }}>
       <Box sx={{ mb: 2 }}>
         <Grid container spacing={2}>
           <Grid xs={8} item>
@@ -127,9 +142,15 @@ export const SectionForm = () => {
         </Button>
       </Box>
 
-      <Button variant="contained" onClick={handleAddSection}>
-        Add section
-      </Button>
-    </div>
+      {section ? (
+        <Button variant="contained" onClick={handleUpdateSection}>
+          Update section
+        </Button>
+      ) : (
+        <Button variant="contained" onClick={handleAddSection}>
+          Add section
+        </Button>
+      )}
+    </Box>
   );
 };

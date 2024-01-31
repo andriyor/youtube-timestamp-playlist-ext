@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Box, IconButton, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 import { CSS } from '@dnd-kit/utilities';
@@ -9,13 +10,20 @@ import { useSortable } from '@dnd-kit/sortable';
 
 import { Section } from '../../types/playlist';
 import { formatSeconds } from '../../helpers';
+import { SectionForm } from './sectionForm';
 
 type SortableSectionProps = {
   section: Section;
   onSectionDelete: () => void;
+  onEditSection?: (form: Section) => void;
 };
 
-export const SortableSection = ({ section, onSectionDelete }: SortableSectionProps) => {
+export const SortableSection = ({
+  section,
+  onSectionDelete,
+  onEditSection,
+}: SortableSectionProps) => {
+  const [isViewMode, setIsViewMode] = useState(true);
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: section.id,
   });
@@ -25,28 +33,52 @@ export const SortableSection = ({ section, onSectionDelete }: SortableSectionPro
     transition,
   };
 
+  const handleEdit = () => {
+    setIsViewMode(false);
+  };
+
+  const handleEditSection = (form: Section) => {
+    setIsViewMode(true);
+    onEditSection(form);
+  };
+
   return (
     <div ref={setNodeRef} style={style} {...attributes}>
       <ListItem disablePadding>
         <Box sx={{ display: 'flex', flex: 1 }}>
-          <ListItemButton>
-            <ListItemText
-              primary={
-                <Box sx={{ display: 'flex' }}>
-                  <Box>{section.title}</Box>
-                  <Box sx={{ ml: 'auto' }}>
-                    {`${formatSeconds(section.startSecond)} - ${formatSeconds(section.endSecond)}`}
+          {isViewMode ? (
+            <ListItemButton>
+              <ListItemText
+                primary={
+                  <Box sx={{ display: 'flex' }}>
+                    <Box>{section.title}</Box>
+                    <Box sx={{ ml: 'auto' }}>
+                      {`${formatSeconds(section.startSecond)} - ${formatSeconds(
+                        section.endSecond,
+                      )}`}
+                    </Box>
                   </Box>
-                </Box>
-              }
-            />
-          </ListItemButton>
+                }
+              />
+            </ListItemButton>
+          ) : (
+            <Box sx={{ flex: 1 }}>
+              <SectionForm onEditSection={handleEditSection} section={section} />
+            </Box>
+          )}
 
           <Box sx={{ display: 'flex', ml: 'auto' }}>
             <Box sx={{ mr: 2 }}>
               <IconButton edge="end" aria-label="delete" onClick={onSectionDelete}>
                 <DeleteIcon />
               </IconButton>
+            </Box>
+            <Box sx={{ mr: 2 }}>
+              {isViewMode && (
+                <IconButton edge="end" aria-label="delete" onClick={handleEdit}>
+                  <EditIcon />
+                </IconButton>
+              )}
             </Box>
             <Box>
               <div
