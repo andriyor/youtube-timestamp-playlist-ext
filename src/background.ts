@@ -13,20 +13,22 @@ type playYoutubeMessage = {
 
 browser.runtime.onMessage.addListener((message: playYoutubeMessage) => {
   if (message.text === 'playYoutube') {
-    browser.tabs.query({ active: true, currentWindow: true }).then(async (tabs) => {
+    void browser.tabs.query({ active: true, currentWindow: true }).then(async (tabs) => {
       for (const section of message.playlist.sections) {
-        await browser.tabs.update(tabs[0].id, {
-          url: `https://www.youtube.com/watch?v=${section.videoId}&t=${section.startSecond}`,
-        });
+        if (tabs[0]?.id) {
+          await browser.tabs.update(tabs[0].id, {
+            url: `https://www.youtube.com/watch?v=${section.videoId}&t=${section.startSecond}`,
+          });
 
-        await timeout(2000);
+          await timeout(2000);
 
-        await browser.tabs.sendMessage(tabs[0].id, {
-          command: 'track',
-          endSecond: section.endSecond,
-        });
+          await browser.tabs.sendMessage(tabs[0].id, {
+            command: 'track',
+            endSecond: section.endSecond,
+          });
 
-        console.log(`${section.title} played`);
+          console.log(`${section.title} played`);
+        }
       }
     });
   }

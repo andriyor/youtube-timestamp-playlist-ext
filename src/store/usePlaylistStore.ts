@@ -3,31 +3,31 @@ import { create } from 'zustand';
 
 import { Playlist, Section } from '../types/playlist';
 
-interface PlaylistActions {
+type PlaylistActions = {
   addPlaylist: (playlistName: string) => void;
   addSectionToPlaylist: (playlistIndex: number, section: Section) => void;
   deletePlaylist: (playlistIndex: number) => void;
   updatePlaylists: (newPlaylist: Playlist[]) => void;
   playlistSectionsChange: (playlistIndex: number, sections: Section[]) => void;
   deleteSection: (playlistIndex: number, sectionIndex: number) => void;
-}
+};
 
-interface PlaylistState {
+type PlaylistState = {
   playlists: Playlist[];
   getPlaylistFromStorage: () => void;
-}
+};
 
 const updatePlaylists = (newPlaylists: Playlist[]) => {
-  browser.storage.local.set({ playlists: newPlaylists });
+  void browser.storage.local.set({ playlists: newPlaylists });
   return { playlists: newPlaylists };
 };
 
 export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) => ({
   playlists: [],
   getPlaylistFromStorage: () => {
-    browser.storage.local.get().then((res) => {
-      if (res.playlists) {
-        set((state) => ({ playlists: res.playlists }));
+    void browser.storage.local.get().then((res) => {
+      if (res['playlists']) {
+        set(() => ({ playlists: res['playlists'] as Playlist[] }));
       }
     });
   },
@@ -42,7 +42,7 @@ export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) 
   addSectionToPlaylist: (playlistIndex, section) => {
     set((state) => {
       const newPlaylists = [...state.playlists];
-      if (newPlaylists[playlistIndex].sections) {
+      if (newPlaylists[playlistIndex]) {
         newPlaylists[playlistIndex].sections = [...newPlaylists[playlistIndex].sections, section];
       } else {
         newPlaylists[playlistIndex].sections = [section];
@@ -60,7 +60,7 @@ export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) 
     });
   },
   updatePlaylists: (newPlaylists) => {
-    set((state) => {
+    set(() => {
       return updatePlaylists(newPlaylists);
     });
   },
@@ -75,7 +75,7 @@ export const usePlaylistStore = create<PlaylistState & PlaylistActions>()((set) 
   deleteSection: (playlistIndex, sectionIndex) => {
     set((state) => {
       const newPlaylists = [...state.playlists];
-      newPlaylists[playlistIndex].sections.splice(sectionIndex, 1);
+      newPlaylists[playlistIndex]?.sections.splice(sectionIndex, 1);
 
       return updatePlaylists(newPlaylists);
     });

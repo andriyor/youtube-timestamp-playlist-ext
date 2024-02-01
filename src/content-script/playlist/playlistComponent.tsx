@@ -32,7 +32,7 @@ export const PlaylistComponent = () => {
   const { setView, setSelected } = useViewStore((state) => state);
 
   useEffect(() => {
-    const playlistViewModes = playlists.map((_) => 'VIEW' as ViewMode);
+    const playlistViewModes = playlists.map(() => 'VIEW' as ViewMode);
     setPlaylistViewModes(playlistViewModes);
     setImmediatePlaylists(playlists);
   }, [playlists]);

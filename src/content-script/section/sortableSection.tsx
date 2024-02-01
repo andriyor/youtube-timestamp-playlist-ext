@@ -15,7 +15,7 @@ import { SectionForm } from './sectionForm';
 type SortableSectionProps = {
   section: Section;
   onSectionDelete: () => void;
-  onEditSection?: (form: Section) => void;
+  onEditSection: (form: Section) => void;
 };
 
 export const SortableSection = ({

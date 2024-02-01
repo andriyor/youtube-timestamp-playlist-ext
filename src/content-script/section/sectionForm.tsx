@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Box, Button, Grid, TextField } from '@mui/material';
 
@@ -16,7 +16,12 @@ export const SectionForm = ({ section, onEditSection }: SectionFormProps) => {
   const { addSectionToPlaylist } = usePlaylistStore((state) => state);
   const { selectedPlaylistIndex } = useViewStore((state) => state);
   const params = new URL(document.location.href).searchParams;
-  const videoId = params.get('v');
+  const videoId = params.get('v') ?? '';
+  const videoRef = useRef<null | HTMLVideoElement>(null);
+
+  useEffect(() => {
+    videoRef.current = document.querySelector('video');
+  }, []);
 
   const [form, setForm] = useState<Section>({
     id: '',
@@ -33,19 +38,21 @@ export const SectionForm = ({ section, onEditSection }: SectionFormProps) => {
   }, [section]);
 
   const setCurrentPositionAsStart = () => {
-    const video = document.querySelector('video');
-    setForm({
-      ...form,
-      startSecond: Math.round(video.currentTime),
-    });
+    if (videoRef.current) {
+      setForm({
+        ...form,
+        startSecond: Math.round(videoRef.current.currentTime),
+      });
+    }
   };
 
   const setCurrentPositionAsEnd = () => {
-    const video = document.querySelector('video');
-    setForm({
-      ...form,
-      endSecond: Math.round(video.currentTime),
-    });
+    if (videoRef.current) {
+      setForm({
+        ...form,
+        endSecond: Math.round(videoRef.current.currentTime),
+      });
+    }
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,11 +70,13 @@ export const SectionForm = ({ section, onEditSection }: SectionFormProps) => {
   };
 
   const handleUpdateSection = () => {
-    onEditSection(form);
+    onEditSection && onEditSection(form);
   };
 
   const setCurrentTitle = () => {
-    const title = (document.querySelector('h1.ytd-watch-metadata') as HTMLTitleElement).innerText;
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    const titleHtml = document.querySelector('h1.ytd-watch-metadata') as HTMLHeadElement | null;
+    const title: string = titleHtml ? titleHtml.innerText : '';
     setForm({
       ...form,
       title,

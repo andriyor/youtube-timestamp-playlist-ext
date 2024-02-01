@@ -17,24 +17,24 @@ export const App = () => {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
   useEffect(() => {
-    browser.storage.local.get().then((res) => {
+    void browser.storage.local.get().then((res) => {
       console.log('res');
       console.log(res);
-      if (res.playlists) {
-        setPlaylists(res.playlists);
+      if (res['playlists']) {
+        setPlaylists(res['playlists'] as Playlist[]);
       }
     });
   }, []);
 
   const handlePlaylistClick = (playlist: Playlist) => {
-    browser.runtime.sendMessage({
+    void browser.runtime.sendMessage({
       text: 'playYoutube',
       playlist,
     });
   };
 
   const handleClear = () => {
-    browser.storage.local.clear();
+    void browser.storage.local.clear();
   };
 
   return (

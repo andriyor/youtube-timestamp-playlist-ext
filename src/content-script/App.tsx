@@ -16,7 +16,6 @@ export const App = () => {
   if (view === 'playlist') {
     return <PlaylistComponent />;
   }
-  if (view === 'sections') {
-    return <SectionComponent />;
-  }
+
+  return <SectionComponent />;
 };

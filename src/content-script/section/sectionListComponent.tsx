@@ -37,7 +37,7 @@ export const SectionListComponent = () => {
     const { active, over } = event;
     const newSections = [...selectedPlaylist.sections];
 
-    if (active.id !== over.id) {
+    if (over && active.id !== over.id) {
       const oldIndex = newSections.findIndex((section) => section.id === active.id);
       const newIndex = newSections.findIndex((section) => section.id === over.id);
       const changedSections = arrayMove(newSections, oldIndex, newIndex);

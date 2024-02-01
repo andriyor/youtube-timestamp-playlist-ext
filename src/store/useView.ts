@@ -2,13 +2,13 @@ import { create } from 'zustand';
 
 export type View = 'playlist' | 'sections';
 
-interface ViewState {
+type ViewState = {
   view: View;
   setView: (view: View) => void;
 
   selectedPlaylistIndex: number;
   setSelected: (playlistIndex: number) => void;
-}
+};
 
 export const useViewStore = create<ViewState>()((set) => ({
   view: 'playlist',

@@ -16,29 +16,38 @@ import { HTMLElementEvent } from './types/HTMLElementEvent';
   }
   window.hasRun = true;
 
-  browser.runtime.onMessage.addListener((message) => {
+  type ContentMessage = {
+    command: string;
+    endSecond: number;
+  };
+
+  browser.runtime.onMessage.addListener((message: ContentMessage) => {
     if (message.command === 'track') {
       const video = document.querySelector('video');
       return new Promise<void>((resolve) => {
-        video.addEventListener('timeupdate', (e: HTMLElementEvent<HTMLVideoElement>) => {
-          const videoElement = e.target;
-          console.log(videoElement.currentTime);
-          console.log(message.endSecond);
-          console.log('');
-          if (videoElement.currentTime >= message.endSecond) {
-            resolve();
-          }
-        });
+        if (video) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          video.addEventListener('timeupdate', (e: HTMLElementEvent<HTMLVideoElement>) => {
+            const videoElement = e.target;
+            if (videoElement.currentTime >= message.endSecond) {
+              resolve();
+            }
+          });
+        }
       });
     }
+    return;
   });
 
   setTimeout(() => {
     const topRow = document.querySelector('#top-row');
     const span = document.createElement('span');
     span.setAttribute('id', 'Div1');
-    topRow.after(span);
-    const root = createRoot(span);
-    root.render(<AppWrapper />);
+    if (topRow) {
+      topRow.after(span);
+      const root = createRoot(span);
+      root.render(<AppWrapper />);
+    }
   }, 1000);
 })();
