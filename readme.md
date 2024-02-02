@@ -17,8 +17,10 @@
 - [x] delete section
 - [x] edit section time
 - [x] add validation of time (end time should be after start time)
+- [x] import/export playlist
 - [ ] edit time manually
-- [ ] import/export playlist
+- [ ] validate file input
+- [ ] fin appropriate icon
 
 ### Tech debt
 

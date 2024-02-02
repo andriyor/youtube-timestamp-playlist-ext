@@ -15,8 +15,6 @@ type SectionFormProps = {
 export const SectionForm = ({ section, onEditSection }: SectionFormProps) => {
   const { addSectionToPlaylist } = usePlaylistStore((state) => state);
   const { selectedPlaylistIndex } = useViewStore((state) => state);
-  const params = new URL(document.location.href).searchParams;
-  const videoId = params.get('v') ?? '';
   const videoRef = useRef<null | HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -25,7 +23,7 @@ export const SectionForm = ({ section, onEditSection }: SectionFormProps) => {
 
   const [form, setForm] = useState<Section>({
     id: '',
-    videoId: videoId,
+    videoId: '',
     title: '',
     startSecond: 0,
     endSecond: 0,
@@ -63,8 +61,11 @@ export const SectionForm = ({ section, onEditSection }: SectionFormProps) => {
   };
 
   const handleAddSection = () => {
+    const params = new URL(document.location.href).searchParams;
+    const videoId = params.get('v') ?? '';
     addSectionToPlaylist(selectedPlaylistIndex, {
       ...form,
+      videoId,
       id: nanoid(),
     });
   };

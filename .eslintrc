@@ -12,6 +12,7 @@
     "tsconfigRootDir": "./tsconfig.json"
   },
   "rules": {
+    "no-console": "warn",
     "etc/no-const-enum": "error",
     "@typescript-eslint/switch-exhaustiveness-check": "error",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
