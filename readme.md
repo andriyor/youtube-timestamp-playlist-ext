@@ -1,5 +1,7 @@
 # youtube-playlist
 
+YouTube playlist by time interval
+
 ## Related project
 
 [cytsunny/youtube-playlist](https://github.com/cytsunny/youtube-playlist?tab=readme-ov-file)
@@ -18,6 +20,8 @@
 - [x] edit section time
 - [x] add validation of time (end time should be after start time)
 - [x] import/export playlist
+- [ ] support dark mode
+- [ ] handle youtube adds
 - [ ] edit time manually
 - [ ] validate file input
 - [ ] fin appropriate icon

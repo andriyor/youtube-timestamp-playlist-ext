@@ -1,17 +1,17 @@
 {
   "manifest_version": 2,
-  "name": "Webpack Example",
+  "name": "YouTube playlist by time interval",
   "version": "1.0.0",
-  "description": "A minimal example of how to use npm modules from within a WebExtension.",
+  "description": "Allows you to create YouTube playlist based on time interval.",
   "icons": {
-    "32": "icons/leftpad-32.png"
+    "32": "icons/youtube_playlist_icon.png"
   },
   "permissions": [
     "activeTab",
     "storage"
   ],
   "browser_action": {
-    "default_icon": "icons/leftpad-32.png",
+    "default_icon": "icons/youtube_playlist_icon.png",
     "default_title": "YTP",
     "default_popup": "popup.html",
     "browser_style": true
@@ -30,7 +30,7 @@
   "host_permissions": [
     "tabs",
     "notifications",
-    "http://*/",
-    "https://*/"
+    "http://www.youtube.com/",
+    "https://www.youtube.com/"
   ]
 }
