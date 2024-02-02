@@ -1,10 +1,24 @@
 # youtube-playlist
 
-YouTube playlist by time interval
+YouTube playlist by time interval (works only with YouTube Premium)
+
+## Screenshots
+
+### Playlists
+
+<img width="1329" alt="image" src="https://github.com/andriyor/youtube-timestamp-playlist-ext/assets/11459840/f6104707-db6a-40f3-b863-ff164ff9ada3">
+
+### Sections
+
+<img width="1301" alt="image" src="https://github.com/andriyor/youtube-timestamp-playlist-ext/assets/11459840/84998d8f-b326-4d31-b3f8-612813259cf2">
+
+### Popup
+
+<img width="315" alt="image" src="https://github.com/andriyor/youtube-timestamp-playlist-ext/assets/11459840/cec66123-3dfb-4169-bc67-11095faa1a85">
 
 ## Related project
 
-[cytsunny/youtube-playlist](https://github.com/cytsunny/youtube-playlist?tab=readme-ov-file)
+[cytsunny/youtube-playlist](https://www.w3schools.com/html/pic_trulli.jpg)
 
 ## TODO
 
@@ -57,3 +71,7 @@ WEB_EXT_API_SECRET="*****"
 ```
 
 [Obtain your personal access credentials here.](https://addons.mozilla.org/en-US/developers/addon/api/key/)
+
+```shell
+pnpm run publish
+```
