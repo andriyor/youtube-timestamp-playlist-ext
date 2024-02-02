@@ -20,7 +20,8 @@ YouTube playlist by time interval
 - [x] edit section time
 - [x] add validation of time (end time should be after start time)
 - [x] import/export playlist
-- [ ] play selected section
+- [x] play selected section
+- [ ] store thumbnail URL
 - [ ] support dark mode
 - [ ] handle youtube adds
 - [ ] edit time manually
@@ -34,6 +35,7 @@ YouTube playlist by time interval
 - [x] strict eslint rules
 - [ ] lint file names convention
 - [ ] unit tests
+- [ ] github action with release
 
 ## Develop
 

@@ -10,6 +10,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Typography,
   styled,
 } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -96,6 +97,9 @@ export const App = () => {
     <Card sx={{ minWidth: 300 }}>
       <CardContent>
         <Box sx={{ mb: 2 }}>
+          <Typography variant="h5" gutterBottom>
+            Playlists:
+          </Typography>
           <List>
             {playlists.map((playlist) => {
               return (

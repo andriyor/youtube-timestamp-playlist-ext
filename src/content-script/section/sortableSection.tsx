@@ -42,12 +42,16 @@ export const SortableSection = ({
     onEditSection(form);
   };
 
+  const handleSectionClick = () => {
+    window.location.href = `https://www.youtube.com/watch?v=${section.videoId}&t=${section.startSecond}`;
+  };
+
   return (
     <div ref={setNodeRef} style={style} {...attributes}>
       <ListItem disablePadding>
         <Box sx={{ display: 'flex', flex: 1 }}>
           {isViewMode ? (
-            <ListItemButton>
+            <ListItemButton onClick={handleSectionClick}>
               <ListItemText
                 primary={
                   <Box sx={{ display: 'flex' }}>
