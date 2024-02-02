@@ -20,6 +20,7 @@ YouTube playlist by time interval
 - [x] edit section time
 - [x] add validation of time (end time should be after start time)
 - [x] import/export playlist
+- [ ] play selected section
 - [ ] support dark mode
 - [ ] handle youtube adds
 - [ ] edit time manually
@@ -33,3 +34,24 @@ YouTube playlist by time interval
 - [x] strict eslint rules
 - [ ] lint file names convention
 - [ ] unit tests
+
+## Develop
+
+```shell
+pnpm install
+pnpm run build
+# to run in Firefox
+cd dist
+web-ext run
+```
+
+## Publish to Firefox
+
+create `.env` file
+
+```
+WEB_EXT_API_KEY="*****"
+WEB_EXT_API_SECRET="*****"
+```
+
+[Obtain your personal access credentials here.](https://addons.mozilla.org/en-US/developers/addon/api/key/)
