@@ -16,6 +16,7 @@
 - [x] change order of sections
 - [x] delete section
 - [x] edit section time
+- [x] add validation of time (end time should be after start time)
 - [ ] edit time manually
 - [ ] import/export playlist
 
@@ -23,6 +24,6 @@
 
 - [x] try [zustand](https://github.com/pmndrs/zustand)
 - [ ] try [parcel](https://parceljs.org/recipes/web-extension/)
-- [ ] strict eslint rules
+- [x] strict eslint rules
 - [ ] lint file names convention
 - [ ] unit tests

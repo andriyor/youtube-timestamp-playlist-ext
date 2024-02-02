@@ -99,6 +99,8 @@ export const SectionForm = ({ section, onEditSection }: SectionFormProps) => {
     });
   };
 
+  const isValidTimestamp = form.endSecond - form.startSecond > 0;
+
   return (
     <Box sx={{ flex: 1 }}>
       <Box sx={{ mb: 2 }}>
@@ -144,19 +146,23 @@ export const SectionForm = ({ section, onEditSection }: SectionFormProps) => {
             size="small"
             onChange={(e) => handleEndChange(e.target.value)}
             value={formatSeconds(form.endSecond)}
+            error={!isValidTimestamp}
+            {...(!isValidTimestamp && { helperText: 'End time should be after start time' })}
           />
         </Box>
-        <Button variant="contained" onClick={setCurrentPositionAsEnd}>
-          Current position
-        </Button>
+        <Box>
+          <Button variant="contained" onClick={setCurrentPositionAsEnd}>
+            Current position
+          </Button>
+        </Box>
       </Box>
 
       {section ? (
-        <Button variant="contained" onClick={handleUpdateSection}>
+        <Button disabled={!isValidTimestamp} variant="contained" onClick={handleUpdateSection}>
           Update section
         </Button>
       ) : (
-        <Button variant="contained" onClick={handleAddSection}>
+        <Button disabled={!isValidTimestamp} variant="contained" onClick={handleAddSection}>
           Add section
         </Button>
       )}
