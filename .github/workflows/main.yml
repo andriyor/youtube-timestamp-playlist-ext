@@ -1,6 +1,10 @@
 name: CI
 
 on: push
+
+permissions:
+  contents: write # for softprops/action-gh-release to create GitHub release
+
 jobs:
   build:
     runs-on: ubuntu-latest
