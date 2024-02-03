@@ -61,7 +61,7 @@ export const SectionListComponent = () => {
       <CardContent>
         <Box sx={{ ml: 2 }}>
           <Typography variant="h5" gutterBottom>
-            Sections:
+            {selectedPlaylist.title}
           </Typography>
         </Box>
 

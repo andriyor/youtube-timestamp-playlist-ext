@@ -55,8 +55,14 @@ export const SortableSection = ({
               <ListItemText
                 primary={
                   <Box sx={{ display: 'flex' }}>
-                    <Box>{section.title}</Box>
-                    <Box sx={{ ml: 'auto' }}>
+                    <Box sx={{ mr: 2 }}>
+                      <img
+                        height="66"
+                        src={`https://i.ytimg.com/vi/${section.videoId}/default.jpg`}
+                      />
+                    </Box>
+                    <Box sx={{ alignSelf: 'center' }}>{section.title}</Box>
+                    <Box sx={{ ml: 'auto', alignSelf: 'center' }}>
                       {`${formatSeconds(section.startSecond)} - ${formatSeconds(
                         section.endSecond,
                       )}`}
@@ -71,7 +77,7 @@ export const SortableSection = ({
             </Box>
           )}
 
-          <Box sx={{ display: 'flex', ml: 'auto' }}>
+          <Box sx={{ display: 'flex', ml: 'auto', alignItems: 'center' }}>
             <Box sx={{ mr: 2 }}>
               <IconButton edge="end" aria-label="delete" onClick={onSectionDelete}>
                 <DeleteIcon />

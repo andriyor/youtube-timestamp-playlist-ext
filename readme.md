@@ -36,17 +36,17 @@ YouTube playlist by time interval (works only with YouTube Premium)
 - [x] import/export playlist
 - [x] play selected section
 - [x] support dark mode
-- [ ] store thumbnail URL
+- [x] show thumbnails
+- [ ] add scroll
 - [ ] handle youtube adds
 - [ ] edit time manually
 - [ ] validate file input
-- [ ] fin appropriate icon
 
 ### Tech debt
 
 - [x] try [zustand](https://github.com/pmndrs/zustand)
-- [ ] try [parcel](https://parceljs.org/recipes/web-extension/)
 - [x] strict eslint rules
+- [ ] try [parcel](https://parceljs.org/recipes/web-extension/)
 - [ ] lint file names convention
 - [ ] unit tests
 - [ ] github action with release

@@ -15,7 +15,7 @@ export const SectionComponent = () => {
     <div>
       <Box sx={{ mb: 2 }}>
         <Button onClick={handleBackToPlaylist} variant="outlined" startIcon={<ArrowBackIosIcon />}>
-          Back to playlist
+          Back to playlists
         </Button>
       </Box>
 
