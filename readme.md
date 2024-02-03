@@ -10,7 +10,7 @@ YouTube playlist by time interval (works only with YouTube Premium)
 
 ### Sections
 
-<img width="1311" alt="image" src="https://github.com/andriyor/youtube-timestamp-playlist-ext/assets/11459840/98ebc658-f399-4cef-a008-ce7bde02a1db">
+<img width="1312" alt="image" src="https://github.com/andriyor/youtube-timestamp-playlist-ext/assets/11459840/245aa52a-5844-4795-a5f2-cb205af78f49">
 
 ### Popup
 
