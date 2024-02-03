@@ -23,4 +23,4 @@ jobs:
       - name: Build
         run: pnpm build
       - name: Build artifact
-        run: cd dist && web-ext build
+        run: pnpm build-artifacts

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run typecheck && rimraf dist && webpack --mode='production'",
+    "build-artifacts": "rimraf web-ext-artifacts && web-ext build -s dist",
     "publish": "export $(cat .env | xargs) && cd dist && web-ext sign",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
