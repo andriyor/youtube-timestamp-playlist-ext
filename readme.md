@@ -10,11 +10,11 @@ YouTube playlist by time interval (works only with YouTube Premium)
 
 ### Sections
 
-<img width="1301" alt="image" src="https://github.com/andriyor/youtube-timestamp-playlist-ext/assets/11459840/84998d8f-b326-4d31-b3f8-612813259cf2">
+<img width="1311" alt="image" src="https://github.com/andriyor/youtube-timestamp-playlist-ext/assets/11459840/98ebc658-f399-4cef-a008-ce7bde02a1db">
 
 ### Popup
 
-<img width="315" alt="image" src="https://github.com/andriyor/youtube-timestamp-playlist-ext/assets/11459840/cec66123-3dfb-4169-bc67-11095faa1a85">
+<img width="319" alt="image" src="https://github.com/andriyor/youtube-timestamp-playlist-ext/assets/11459840/0ea155dd-f1a0-4acd-b213-0b43d82a4bca">
 
 ## Related project
 
@@ -46,10 +46,10 @@ YouTube playlist by time interval (works only with YouTube Premium)
 
 - [x] try [zustand](https://github.com/pmndrs/zustand)
 - [x] strict eslint rules
+- [x] github action with release
 - [ ] try [parcel](https://parceljs.org/recipes/web-extension/)
 - [ ] lint file names convention
 - [ ] unit tests
-- [ ] github action with release
 
 ## Develop
 
@@ -74,4 +74,11 @@ WEB_EXT_API_SECRET="*****"
 
 ```shell
 pnpm run publish
+```
+
+## Create releae on GitHub
+
+```shell
+git tag -a v1.0.4 -m "my version 1.0.4"
+git push origin master --tags
 ```
