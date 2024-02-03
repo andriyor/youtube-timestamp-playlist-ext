@@ -3,3 +3,4 @@ node_modules
 dist
 .env
 web-ext-artifacts
+.DS_Store
