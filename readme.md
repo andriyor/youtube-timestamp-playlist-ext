@@ -35,8 +35,8 @@ YouTube playlist by time interval (works only with YouTube Premium)
 - [x] add validation of time (end time should be after start time)
 - [x] import/export playlist
 - [x] play selected section
+- [x] support dark mode
 - [ ] store thumbnail URL
-- [ ] support dark mode
 - [ ] handle youtube adds
 - [ ] edit time manually
 - [ ] validate file input
