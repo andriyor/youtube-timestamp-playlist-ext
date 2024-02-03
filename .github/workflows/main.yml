@@ -24,3 +24,5 @@ jobs:
         run: pnpm build
       - name: Build artifact
         run: pnpm build-artifacts
+      - name: Release
+        uses: softprops/action-gh-release@v1
