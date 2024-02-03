@@ -18,7 +18,7 @@ YouTube playlist by time interval (works only with YouTube Premium)
 
 ## Related project
 
-[cytsunny/youtube-playlist](https://www.w3schools.com/html/pic_trulli.jpg)
+[cytsunny/youtube-playlist](https://github.com/cytsunny/youtube-playlist/)
 
 ## TODO
 
