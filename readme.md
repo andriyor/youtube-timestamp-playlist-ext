@@ -50,6 +50,8 @@ YouTube playlist by time interval (works only with YouTube Premium)
 - [ ] try [parcel](https://parceljs.org/recipes/web-extension/)
 - [ ] lint file names convention
 - [ ] unit tests
+- [ ] try https://github.com/wxt-dev/wxt
+- [ ] try https://github.com/g-plane/typed-query-selector
 
 ## Develop
 
