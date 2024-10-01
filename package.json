@@ -14,7 +14,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@8.15.1",
+  "packageManager": "pnpm@9.11.0+sha256.1c0e33f70e5df9eede84a357bdfa0b1f9dba6e58194628d48a1055756f553754",
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.2",
     "@types/react": "^18.2.51",

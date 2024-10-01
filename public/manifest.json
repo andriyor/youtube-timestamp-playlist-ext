@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "YouTube playlist by time interval",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Allows you to create YouTube playlist based on time interval. (works only with YouTube Premium)",
   "icons": {
     "32": "icons/youtube_playlist_icon.png",
@@ -36,7 +36,7 @@
   ],
   "browser_specific_settings": {
     "gecko": {
-      "id": "b5d7456a-946d-499b-bd7e-116c73ac4099"
+      "id": "{b5d7456a-946d-499b-bd7e-116c73ac4099}"
     }
   }
 }
